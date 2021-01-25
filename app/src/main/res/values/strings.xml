@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RoomApp</string>
+    <string name="title_home">Home</string>
+    <string name="title_my_rooms">My Rooms</string>
+    <string name="title_inbox">Inbox</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
