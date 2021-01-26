@@ -5,4 +5,8 @@
     <string name="title_inbox">Inbox</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="events">Events</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="discussions">Discussions</string>
+    <string name="information_button">Information Button</string>
 </resources>

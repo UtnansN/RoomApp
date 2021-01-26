@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.MainActivity
 import com.example.roomapp.R
@@ -15,6 +18,8 @@ import com.example.roomapp.data.models.Room
 class RoomsFragment : Fragment() {
 
     private lateinit var roomsViewModel: RoomsViewModel
+    private lateinit var roomRecyclerView: RecyclerView
+    private lateinit var roomsItemAdapter: RoomsItemAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -23,23 +28,29 @@ class RoomsFragment : Fragment() {
     ): View? {
 
         roomsViewModel =
-                ViewModelProvider(this).get(RoomsViewModel::class.java)
+                ViewModelProvider(requireActivity()).get(RoomsViewModel::class.java)
 
         val root = inflater.inflate(R.layout.fragment_my_rooms, container, false)
 
+        roomsItemAdapter = RoomsItemAdapter(RoomsItemAdapter.RoomDiff())
+        roomRecyclerView = root.findViewById(R.id.rec_my_rooms)
+        roomRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = roomsItemAdapter
+        }
+
         val addRoomFab: View = root.findViewById(R.id.fab_add_room)
-        addRoomFab.setOnClickListener { addRoom(it) }
-
-        val adapter = RoomsItemAdapter()
-
-//        val roomRecyclerView: RecyclerView = root.findViewById(R.id.rec_my_rooms)
-//        val data = (activity as MainActivity).db!!.roomDao().getAll()
-//        roomRecyclerView.adapter = RoomsItemAdapter(dataSet = data)
+        addRoomFab.setOnClickListener { roomsViewModel.addRoom() }
 
         return root
     }
 
-    private fun addRoom(view: View) {
-        AppDatabase.getInstance(requireContext()).roomDao().insert(Room(id = 0, name = "AAAA", description = "ASDF"))
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        roomsViewModel.getUserRooms().observe(viewLifecycleOwner, Observer {
+            rooms -> rooms?.let { roomsItemAdapter.submitList(it) }
+        })
     }
+
 }

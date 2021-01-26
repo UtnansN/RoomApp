@@ -10,7 +10,7 @@ import com.example.roomapp.data.models.Room
 interface RoomDao {
 
     @Query("SELECT * FROM room ORDER BY name")
-    fun getAll(): List<Room>
+    fun getAll(): LiveData<List<Room>>
 
     @Insert
     fun insert(room: Room)

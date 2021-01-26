@@ -5,22 +5,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.NonNull
 import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.R
 import com.example.roomapp.data.models.Room
 
-class RoomsItemAdapter : RecyclerView.Adapter<RoomsItemAdapter.ViewHolder>() {
-
-    var data = listOf<Room>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class RoomsItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Room>) : ListAdapter<Room, RoomsItemAdapter.ViewHolder>(diffCallback) {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtName: TextView = itemView.findViewById(R.id.txt_room_name)
         val imgRoomAvatar: ImageView = itemView.findViewById(R.id.img_room)
+    }
+
+    class RoomDiff : DiffUtil.ItemCallback<Room>() {
+        override fun areItemsTheSame(oldItem: Room, newItem: Room): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Room, newItem: Room): Boolean {
+            return oldItem.id == newItem.id
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,14 +36,11 @@ class RoomsItemAdapter : RecyclerView.Adapter<RoomsItemAdapter.ViewHolder>() {
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val room: Room = data[position]
+        val room: Room = getItem(position)
 
         holder.txtName.text = room.name
+        holder.imgRoomAvatar.setImageResource(R.drawable.ic_home_black_24dp)
     }
 
 }
