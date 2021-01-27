@@ -1,4 +1,4 @@
-package com.example.roomapp.ui.rooms
+package com.example.roomapp.ui.allrooms
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,14 +6,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.R
 import com.example.roomapp.data.models.Room
 
-class RoomsItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Room>) : ListAdapter<Room, RoomsItemAdapter.ViewHolder>(diffCallback) {
+class AllRoomsItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Room>) : ListAdapter<Room, AllRoomsItemAdapter.ViewHolder>(diffCallback) {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtName: TextView = itemView.findViewById(R.id.txt_room_name)

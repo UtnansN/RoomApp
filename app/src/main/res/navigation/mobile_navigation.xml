@@ -7,13 +7,18 @@
 
     <fragment
         android:id="@+id/navigation_my_rooms"
-        android:name="com.example.roomapp.ui.rooms.RoomsFragment"
+        android:name="com.example.roomapp.ui.allrooms.AllRoomsFragment"
         android:label="@string/title_my_rooms"
-        tools:layout="@layout/fragment_my_rooms" />
+        tools:layout="@layout/fragment_my_rooms" >
+        <action
+            android:id="@+id/action_navigation_my_rooms_to_placeholder"
+            app:destination="@id/navigation_room_info" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_inbox"
-        android:name="com.example.roomapp.ui.notifications.NotificationsFragment"
-        android:label="@string/title_inbox"
-        tools:layout="@layout/fragment_inbox" />
+        android:id="@+id/navigation_room_info"
+        android:name="com.example.roomapp.ui.room.RoomInfoFragment"
+        android:label="Room Information"
+        tools:layout="@layout/fragment_room"/>
+
 </navigation>
