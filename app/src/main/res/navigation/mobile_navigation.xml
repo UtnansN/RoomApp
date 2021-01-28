@@ -13,6 +13,13 @@
         <action
             android:id="@+id/action_navigation_my_rooms_to_placeholder"
             app:destination="@id/navigation_room_info" />
+        <action
+            android:id="@+id/action_navigation_my_rooms_to_createRoomFragment"
+            app:destination="@id/navigation_room_create"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -20,5 +27,17 @@
         android:name="com.example.roomapp.ui.room.RoomInfoFragment"
         android:label="Room Information"
         tools:layout="@layout/fragment_room"/>
+
+    <fragment
+        android:id="@+id/navigation_room_create"
+        android:name="com.example.roomapp.ui.allrooms.CreateRoomFragment"
+        android:label="CreateRoomFragment"
+        tools:layout="@layout/fragment_room_create">
+        <action
+            android:id="@+id/action_navigation_room_create_to_navigation_my_rooms"
+            app:destination="@id/navigation_my_rooms"
+            app:popUpTo="@id/navigation_my_rooms"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
 </navigation>

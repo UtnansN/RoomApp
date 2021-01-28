@@ -6,16 +6,11 @@ import androidx.lifecycle.LiveData
 import com.example.roomapp.data.AppDatabase
 import com.example.roomapp.data.models.Room
 
-class AllRoomsViewModel(application: Application) : AndroidViewModel(application) {
+class CreateRoomViewModel(application: Application) : AndroidViewModel(application) {
 
     private var database: AppDatabase = AppDatabase.getInstance(application.applicationContext)
-    private var allRooms: LiveData<List<Room>>
 
-    init {
-        allRooms = database.roomDao().getAll()
-    }
-
-    fun getUserRooms(): LiveData<List<Room>> {
-        return allRooms
+    fun addRoom(room: Room) {
+        database.roomDao().insert(room)
     }
 }
