@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.R
 import com.example.roomapp.data.models.Room
 
-class AllRoomsItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Room>) : ListAdapter<Room, AllRoomsItemAdapter.ViewHolder>(diffCallback) {
+class AllRoomsItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Room>,
+                          private val clickListener: (Room) -> Unit
+) : ListAdapter<Room, AllRoomsItemAdapter.ViewHolder>(diffCallback) {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtName: TextView = itemView.findViewById(R.id.txt_room_name)
@@ -32,6 +34,7 @@ class AllRoomsItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Room>) : 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.my_rooms_item, parent, false)
+
         return ViewHolder(view)
     }
 
@@ -39,7 +42,11 @@ class AllRoomsItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Room>) : 
         val room: Room = getItem(position)
 
         holder.txtName.text = room.name
-        holder.imgRoomAvatar.setImageResource(R.drawable.ic_home_black_24dp)
+        holder.imgRoomAvatar.setImageResource(R.drawable.ic_launcher_background)
+
+        holder.itemView.setOnClickListener {
+            clickListener(room)
+        }
     }
 
 }

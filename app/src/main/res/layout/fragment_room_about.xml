@@ -8,14 +8,23 @@
     android:padding="@dimen/fragment_margin"
     tools:context=".ui.allrooms.AllRoomsFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="150dp"
         android:layout_height="150dp"
-        tools:src="@tools:sample/avatars" />
+        android:layout_gravity="center"
+        android:background="@drawable/circle_mask">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            tools:src="@tools:sample/avatars" />
+
+    </FrameLayout>
 
     <TextView
-        android:id="@+id/room_info_name"
+        android:id="@+id/room_name"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:gravity="center_vertical"

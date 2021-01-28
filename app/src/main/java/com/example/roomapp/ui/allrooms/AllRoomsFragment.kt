@@ -29,7 +29,11 @@ class AllRoomsFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_my_rooms, container, false)
 
-        allRoomsItemAdapter = AllRoomsItemAdapter(AllRoomsItemAdapter.RoomDiff())
+        allRoomsItemAdapter = AllRoomsItemAdapter(AllRoomsItemAdapter.RoomDiff()) {
+            val action = AllRoomsFragmentDirections.actionNavigationMyRoomsToSpecificRoom(it.id)
+            findNavController().navigate(action)
+        }
+
         roomRecyclerView = root.findViewById(R.id.rec_my_rooms)
         roomRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
@@ -38,8 +42,10 @@ class AllRoomsFragment : Fragment() {
 
         val addRoomFab: View = root.findViewById(R.id.fab_add_room)
         addRoomFab.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_my_rooms_to_createRoomFragment)
+            findNavController().navigate(R.id.action_navigation_my_rooms_to_joinRoomFragment)
         }
+
+        requireActivity().title = "My Rooms"
 
         return root
     }
