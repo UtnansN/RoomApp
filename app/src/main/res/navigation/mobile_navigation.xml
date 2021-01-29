@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_my_rooms"
-        android:name="com.example.roomapp.ui.allrooms.AllRoomsFragment"
+        android:name="com.example.roomapp.ui.allrooms.fragment.AllRoomsFragment"
         android:label="@string/title_my_rooms"
-        tools:layout="@layout/fragment_my_rooms" >
+        tools:layout="@layout/fragment_room_join">
         <action
             android:id="@+id/action_navigation_my_rooms_to_specific_room"
             app:destination="@id/navigation_room"
@@ -18,43 +18,38 @@
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
         <action
-            android:id="@+id/action_navigation_my_rooms_to_createRoomFragment"
-            app:destination="@id/navigation_room_create"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_navigation_my_rooms_to_joinRoomFragment"
-            app:destination="@id/navigation_room_join" />
+            android:id="@+id/action_navigation_my_rooms_to_createJoinFragment"
+            app:destination="@id/navigation_room_join_create" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_room"
-        android:name="com.example.roomapp.ui.room.RoomFragment"
-        android:label="Room"
-        tools:layout="@layout/fragment_room">
+        android:name="com.example.roomapp.ui.room.fragment.RoomFragment"
+        android:label="Room">
 
-        <argument android:name="roomId"
+        <argument
+            android:name="roomId"
             app:argType="integer" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_room_create"
-        android:name="com.example.roomapp.ui.allrooms.CreateRoomFragment"
-        android:label="Create Room"
-        tools:layout="@layout/fragment_room_create">
         <action
-            android:id="@+id/action_navigation_room_create_to_navigation_my_rooms"
-            app:destination="@id/navigation_my_rooms"
-            app:popUpTo="@id/navigation_my_rooms"
-            app:popUpToInclusive="true"/>
+            android:id="@+id/action_navigation_room_to_roomInfoFragment"
+            app:destination="@id/roomInfoFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_room_join"
-        android:name="com.example.roomapp.ui.allrooms.JoinRoomFragment"
-        android:label="Join Room"
-        tools:layout="@layout/fragment_room_join"/>
+        android:id="@+id/navigation_room_join_create"
+        android:name="com.example.roomapp.ui.allrooms.fragment.CreateOrJoinFragment"
+        android:label="Join Room" >
+        <action
+            android:id="@+id/action_navigation_room_join_create_to_navigation_my_rooms"
+            app:destination="@id/navigation_my_rooms" />
+    </fragment>
+    <fragment
+        android:id="@+id/roomInfoFragment"
+        android:name="com.example.roomapp.ui.room.fragment.RoomInfoFragment"
+        android:label="RoomInfoFragment" >
+        <action
+            android:id="@+id/action_roomInfoFragment_to_navigation_room"
+            app:destination="@id/navigation_room" />
+    </fragment>
 
 </navigation>

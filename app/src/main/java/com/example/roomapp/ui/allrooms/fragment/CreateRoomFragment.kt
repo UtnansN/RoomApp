@@ -1,4 +1,4 @@
-package com.example.roomapp.ui.allrooms
+package com.example.roomapp.ui.allrooms.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.roomapp.R
 import com.example.roomapp.data.models.Room
+import com.example.roomapp.ui.allrooms.viewmodel.CreateRoomViewModel
 
 class CreateRoomFragment : Fragment() {
 
@@ -39,7 +40,7 @@ class CreateRoomFragment : Fragment() {
                     roomCode = "ASDF"
             )
             createRoomViewModel.addRoom(room)
-            findNavController().navigate(R.id.action_navigation_room_create_to_navigation_my_rooms)
+            findNavController().navigate(R.id.action_navigation_room_join_create_to_navigation_my_rooms)
         }
 
         return root

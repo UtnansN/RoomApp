@@ -1,4 +1,4 @@
-package com.example.roomapp.ui.allrooms
+package com.example.roomapp.ui.allrooms.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -35,7 +35,9 @@ class AllRoomsItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Room>,
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.my_rooms_item, parent, false)
 
-        return ViewHolder(view)
+        return ViewHolder(
+            view
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

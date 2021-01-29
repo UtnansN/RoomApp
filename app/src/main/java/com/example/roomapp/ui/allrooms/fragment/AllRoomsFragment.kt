@@ -1,4 +1,4 @@
-package com.example.roomapp.ui.allrooms
+package com.example.roomapp.ui.allrooms.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.R
+import com.example.roomapp.ui.allrooms.adapter.AllRoomsItemAdapter
+import com.example.roomapp.ui.allrooms.viewmodel.AllRoomsViewModel
 
 class AllRoomsFragment : Fragment() {
 
@@ -27,22 +29,28 @@ class AllRoomsFragment : Fragment() {
         allRoomsViewModel =
                 ViewModelProvider(requireActivity()).get(AllRoomsViewModel::class.java)
 
-        val root = inflater.inflate(R.layout.fragment_my_rooms, container, false)
+        val root = inflater.inflate(R.layout.fragment_itemlist, container, false)
 
-        allRoomsItemAdapter = AllRoomsItemAdapter(AllRoomsItemAdapter.RoomDiff()) {
-            val action = AllRoomsFragmentDirections.actionNavigationMyRoomsToSpecificRoom(it.id)
-            findNavController().navigate(action)
-        }
+        allRoomsItemAdapter =
+            AllRoomsItemAdapter(
+                AllRoomsItemAdapter.RoomDiff()
+            ) {
+                val action =
+                    AllRoomsFragmentDirections.actionNavigationMyRoomsToSpecificRoom(
+                        it.id
+                    )
+                findNavController().navigate(action)
+            }
 
-        roomRecyclerView = root.findViewById(R.id.rec_my_rooms)
+        roomRecyclerView = root.findViewById(R.id.rec_items)
         roomRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             adapter = allRoomsItemAdapter
         }
 
-        val addRoomFab: View = root.findViewById(R.id.fab_add_room)
+        val addRoomFab: View = root.findViewById(R.id.fab_add_item)
         addRoomFab.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_my_rooms_to_joinRoomFragment)
+            findNavController().navigate(R.id.action_navigation_my_rooms_to_createJoinFragment)
         }
 
         requireActivity().title = "My Rooms"

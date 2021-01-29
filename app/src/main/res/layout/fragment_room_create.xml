@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/fragment_margin"
-    tools:context=".ui.allrooms.AllRoomsFragment" >
+    tools:context=".ui.allrooms.fragment.AllRoomsFragment" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"

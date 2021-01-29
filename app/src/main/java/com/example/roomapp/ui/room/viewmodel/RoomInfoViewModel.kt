@@ -1,4 +1,4 @@
-package com.example.roomapp.ui.room
+package com.example.roomapp.ui.room.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
