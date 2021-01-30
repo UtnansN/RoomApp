@@ -16,6 +16,9 @@ class EventItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Event>
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtName: TextView = itemView.findViewById(R.id.txt_event_name)
+        val txtTime: TextView = itemView.findViewById(R.id.txt_event_time)
+        val txtLocation: TextView = itemView.findViewById(R.id.txt_event_location)
+        val txtDescription: TextView = itemView.findViewById(R.id.txt_event_description)
     }
 
     class EventDiff : DiffUtil.ItemCallback<Event>() {
@@ -41,11 +44,14 @@ class EventItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Event>
         val event: Event = getItem(position)
 
         holder.txtName.text = event.name
-//        holder.imgRoomAvatar.setImageResource(R.drawable.ic_launcher_background)
+        holder.txtLocation.text = event.location
+        holder.txtTime.text = event.time
+        holder.txtDescription.text = event.description
 
-//        holder.itemView.setOnClickListener {
-//            clickListener(room)
-//        }
+
+        holder.itemView.setOnClickListener {
+            // clickListener(room)
+        }
     }
 
 }
