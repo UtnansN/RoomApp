@@ -11,15 +11,7 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database: AppDatabase = AppDatabase.getInstance(application.applicationContext)
 
-    private val _roomName = MutableLiveData<String>().apply {
-        value = "Room name"
-    }
-    val roomName: LiveData<String> = _roomName
-
-    // FIXME
-    fun setRoomId(roomId: Int) {
-        val room: Room = database.roomDao().getById(roomId)
-        _roomName.value = room.name
-        //_roomName.value = database.roomDao().getById(roomId).value?.name
+    fun getRoomData(roomId: Int): LiveData<Room> {
+        return database.roomDao().getById(roomId)
     }
 }

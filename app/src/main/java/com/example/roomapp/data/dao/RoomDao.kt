@@ -12,7 +12,7 @@ import com.example.roomapp.data.models.Room
 interface RoomDao {
 
     @Query("SELECT * FROM room WHERE id=:id")
-    fun getById(id: Int): Room
+    fun getById(id: Int): LiveData<Room>
 
     @Query("SELECT * FROM room ORDER BY name")
     fun getAll(): LiveData<List<Room>>

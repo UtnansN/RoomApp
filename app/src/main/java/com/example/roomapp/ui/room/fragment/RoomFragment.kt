@@ -37,10 +37,9 @@ class RoomFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_room, container, false)
 
         val txtRoomName: TextView = root.findViewById(R.id.room_name)
-        roomViewModel.setRoomId(requireArguments().getInt("roomId"))
-        roomViewModel.roomName.observe(viewLifecycleOwner, Observer {
-//            txtRoomName.text = requireArguments().getInt("roomId").toString()
-            txtRoomName.text = it
+        roomViewModel.getRoomData(requireArguments().getInt("roomId"))
+                .observe(viewLifecycleOwner, Observer {
+            txtRoomName.text = it.name
         })
 
         val roomInfoButton: ImageButton = root.findViewById(R.id.btn_room_about)
@@ -64,7 +63,6 @@ class RoomFragment : Fragment() {
                 1 -> tab.text = resources.getString(R.string.discussions)
             }
         }.attach()
-
     }
 
 

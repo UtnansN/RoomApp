@@ -32,7 +32,10 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_navigation_room_to_roomInfoFragment"
-            app:destination="@id/roomInfoFragment" />
+            app:destination="@id/navigation_room_info" />
+        <action
+            android:id="@+id/action_navigation_room_to_createEventFragment"
+            app:destination="@id/navigation_create_event" />
     </fragment>
 
     <fragment
@@ -44,12 +47,16 @@
             app:destination="@id/navigation_my_rooms" />
     </fragment>
     <fragment
-        android:id="@+id/roomInfoFragment"
+        android:id="@+id/navigation_room_info"
         android:name="com.example.roomapp.ui.room.fragment.RoomInfoFragment"
-        android:label="RoomInfoFragment" >
+        android:label="Room Information">
         <action
             android:id="@+id/action_roomInfoFragment_to_navigation_room"
             app:destination="@id/navigation_room" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_create_event"
+        android:name="com.example.roomapp.ui.room.fragment.CreateEventFragment"
+        android:label="Create an event" />
 
 </navigation>

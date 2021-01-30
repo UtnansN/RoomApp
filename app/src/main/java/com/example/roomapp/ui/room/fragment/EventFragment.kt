@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.R
-import com.example.roomapp.ui.allrooms.viewmodel.AllRoomsViewModel
 import com.example.roomapp.ui.room.adapter.EventItemAdapter
 import com.example.roomapp.ui.room.viewmodel.EventViewModel
 
@@ -37,7 +37,7 @@ class EventFragment: Fragment() {
 
         val addEventFab: View = root.findViewById(R.id.fab_add_item)
         addEventFab.setOnClickListener {
-//            findNavController().navigate(R.id.action_navigation_my_rooms_to_joinRoomFragment)
+            findNavController().navigate(RoomFragmentDirections.actionNavigationRoomToCreateEventFragment())
         }
 
         return root

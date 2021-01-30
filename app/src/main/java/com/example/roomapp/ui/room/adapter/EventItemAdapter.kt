@@ -3,12 +3,14 @@ package com.example.roomapp.ui.room.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.R
+import com.example.roomapp.Utils
 import com.example.roomapp.data.models.Event
 
 class EventItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Event>
@@ -18,6 +20,7 @@ class EventItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Event>
         val txtName: TextView = itemView.findViewById(R.id.txt_event_name)
         val txtTime: TextView = itemView.findViewById(R.id.txt_event_time)
         val txtLocation: TextView = itemView.findViewById(R.id.txt_event_location)
+        val frameLocation: View = itemView.findViewById(R.id.frame_event_location)
         val txtDescription: TextView = itemView.findViewById(R.id.txt_event_description)
     }
 
@@ -44,10 +47,12 @@ class EventItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Event>
         val event: Event = getItem(position)
 
         holder.txtName.text = event.name
-        holder.txtLocation.text = event.location
         holder.txtTime.text = event.time
-        holder.txtDescription.text = event.description
 
+        Utils.setTextOrViewGoneIfBlank(holder.txtLocation, event.location)
+        Utils.setViewGoneIfBlank(holder.frameLocation, event.location)
+
+        Utils.setTextOrViewGoneIfBlank(holder.txtDescription, event.description)
 
         holder.itemView.setOnClickListener {
             // clickListener(room)
