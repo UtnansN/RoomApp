@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.roomapp.R
-import com.example.roomapp.data.models.Room
+import com.example.roomapp.data.model.Room
 import com.example.roomapp.ui.allrooms.viewmodel.CreateRoomViewModel
 
 class CreateRoomFragment : Fragment() {

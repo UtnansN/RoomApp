@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -23,7 +24,9 @@ class EventFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         eventViewModel = ViewModelProvider(requireActivity()).get(EventViewModel::class.java)
-        eventViewModel.setRoomId(requireArguments().getInt("roomId"))
+
+        val roomId = requireArguments().getInt("roomId")
+        eventViewModel.setRoomId(roomId)
 
         val root = inflater.inflate(R.layout.fragment_itemlist, container, false)
 
@@ -37,7 +40,8 @@ class EventFragment: Fragment() {
 
         val addEventFab: View = root.findViewById(R.id.fab_add_item)
         addEventFab.setOnClickListener {
-            findNavController().navigate(RoomFragmentDirections.actionNavigationRoomToCreateEventFragment())
+            val bundle = bundleOf("roomId" to roomId)
+            findNavController().navigate(R.id.action_navigation_room_to_navigation_create_event, bundle)
         }
 
         return root

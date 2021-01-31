@@ -5,8 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.roomapp.data.dao.RoomDao
-import com.example.roomapp.data.models.Event
-import com.example.roomapp.data.models.Room as RoomEntity
+import com.example.roomapp.data.model.Event
+import com.example.roomapp.data.model.Room as RoomEntity
 
 @Database(entities = [RoomEntity::class, Event::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {

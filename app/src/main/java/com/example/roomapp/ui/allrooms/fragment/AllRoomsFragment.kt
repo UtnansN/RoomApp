@@ -16,7 +16,7 @@ import com.example.roomapp.ui.allrooms.viewmodel.AllRoomsViewModel
 
 class AllRoomsFragment : Fragment() {
 
-    private lateinit var allRoomsViewModel: AllRoomsViewModel
+    private lateinit var viewModel: AllRoomsViewModel
     private lateinit var roomRecyclerView: RecyclerView
     private lateinit var allRoomsItemAdapter: AllRoomsItemAdapter
 
@@ -26,7 +26,7 @@ class AllRoomsFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-        allRoomsViewModel =
+        viewModel =
                 ViewModelProvider(requireActivity()).get(AllRoomsViewModel::class.java)
 
         val root = inflater.inflate(R.layout.fragment_itemlist, container, false)
@@ -59,7 +59,7 @@ class AllRoomsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        allRoomsViewModel.getUserRooms().observe(viewLifecycleOwner, Observer { rooms ->
+        viewModel.getUserRooms().observe(viewLifecycleOwner, Observer { rooms ->
             rooms?.let { allRoomsItemAdapter.submitList(it) }
         })
     }

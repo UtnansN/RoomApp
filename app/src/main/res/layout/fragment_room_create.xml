@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:labelFor="@id/txt_create_room_description"
-            android:text="@string/room_description"
+            android:text="@string/description"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@+id/txt_create_room_name"

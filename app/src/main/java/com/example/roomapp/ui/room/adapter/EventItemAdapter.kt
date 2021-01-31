@@ -3,7 +3,6 @@ package com.example.roomapp.ui.room.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.DiffUtil
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.R
 import com.example.roomapp.Utils
-import com.example.roomapp.data.models.Event
+import com.example.roomapp.data.model.Event
 
 class EventItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Event>
 ) : ListAdapter<Event, EventItemAdapter.ViewHolder>(diffCallback) {
@@ -36,7 +35,7 @@ class EventItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Event>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.event_item, parent, false)
+            .inflate(R.layout.item_event, parent, false)
 
         return ViewHolder(
             view

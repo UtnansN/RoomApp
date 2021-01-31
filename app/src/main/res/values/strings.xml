@@ -27,7 +27,20 @@
     <string name="create_a_room">Create a room</string>
     <string name="join_a_room">Join a room</string>
     <string name="room_name">Name</string>
-    <string name="room_description">Description</string>
+    <string name="description">Description</string>
     <string name="submit">Submit</string>
     <string name="room_code">Room Code</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="event_name">Event Name</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
+    <string name="location">Location</string>
 </resources>

@@ -3,9 +3,8 @@ package com.example.roomapp.ui.room.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.roomapp.data.AppDatabase
-import com.example.roomapp.data.models.Room
+import com.example.roomapp.data.model.Room
 
 class RoomViewModel(application: Application) : AndroidViewModel(application) {
 

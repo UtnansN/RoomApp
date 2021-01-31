@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.R
-import com.example.roomapp.data.models.Room
+import com.example.roomapp.data.model.Room
 
 class AllRoomsItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Room>,
                           private val clickListener: (Room) -> Unit
@@ -33,7 +33,7 @@ class AllRoomsItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Room>,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.my_rooms_item, parent, false)
+                .inflate(R.layout.item_my_room, parent, false)
 
         return ViewHolder(
             view

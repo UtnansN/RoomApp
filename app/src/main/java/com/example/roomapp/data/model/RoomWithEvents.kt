@@ -1,4 +1,4 @@
-package com.example.roomapp.data.models
+package com.example.roomapp.data.model
 
 import androidx.room.Embedded
 import androidx.room.Relation
