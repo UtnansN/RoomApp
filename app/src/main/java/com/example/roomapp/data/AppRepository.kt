@@ -1,21 +1,27 @@
 package com.example.roomapp.data
 
+import androidx.lifecycle.LiveData
 import com.example.roomapp.data.model.local.Room
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import retrofit2.Call
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(private val webService: WebService,
                                         private val localDatabase: LocalDatabase) {
 
-    suspend fun createRoom(room: Room) {
-        webService.createRoom(room)
+    fun createRoom(room: Room): Call<Room> {
+        return webService.createRoom(room)
     }
 
-    suspend fun refreshRooms() {
-        withContext(Dispatchers.IO) {
+    fun getLocalRooms(): LiveData<List<Room>> {
+        return localDatabase.roomDao().getAll()
+    }
 
-        }
+    fun getUpdatedRooms(): Call<List<Room>> {
+        return webService.getRooms()
+    }
+
+    fun refreshRooms(rooms: List<Room>) {
+        localDatabase.roomDao().insertAll(rooms)
     }
 
 }

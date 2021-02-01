@@ -54,7 +54,6 @@ class CreateEventFragment : Fragment() {
                 calendar.set(Calendar.MINUTE, selectedMinute)
                 txtTime.setText( format.format(calendar.time) )},
                 hour, minute, ContextualDateFormat.is24HourFormat(activity))
-
             timePicker.show()
         }
 

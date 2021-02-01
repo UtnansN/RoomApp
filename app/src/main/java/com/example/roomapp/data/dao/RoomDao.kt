@@ -3,6 +3,7 @@ package com.example.roomapp.data.dao
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.roomapp.data.model.local.Event
 import com.example.roomapp.data.model.local.Room
@@ -21,6 +22,9 @@ interface RoomDao {
 
     @Insert
     fun insert(room: Room)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(rooms: List<Room>)
 
     @Insert
     fun insertEvent(event: Event)

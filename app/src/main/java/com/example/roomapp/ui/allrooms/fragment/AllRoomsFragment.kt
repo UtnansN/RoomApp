@@ -23,24 +23,20 @@ class AllRoomsFragment : Fragment() {
     private lateinit var allRoomsItemAdapter: AllRoomsItemAdapter
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         viewModel =
-                ViewModelProvider(requireActivity()).get(AllRoomsViewModel::class.java)
+            ViewModelProvider(requireActivity()).get(AllRoomsViewModel::class.java)
 
         val root = inflater.inflate(R.layout.fragment_itemlist, container, false)
 
-        allRoomsItemAdapter =
-                AllRoomsItemAdapter(
-                        AllRoomsItemAdapter.RoomDiff()
-                ) {
-                    val action =
-                            AllRoomsFragmentDirections.actionNavigationMyRoomsToSpecificRoom(it.id)
-                    findNavController().navigate(action)
-                }
+        allRoomsItemAdapter = AllRoomsItemAdapter(AllRoomsItemAdapter.RoomDiff()) {
+            val action = AllRoomsFragmentDirections.actionNavigationMyRoomsToSpecificRoom(it.id)
+            findNavController().navigate(action)
+        }
 
         roomRecyclerView = root.findViewById(R.id.rec_items)
         roomRecyclerView.apply {
@@ -61,7 +57,7 @@ class AllRoomsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.getUserRooms().observe(viewLifecycleOwner, { rooms ->
+        viewModel.allRooms.observe(viewLifecycleOwner, { rooms ->
             rooms?.let { allRoomsItemAdapter.submitList(it) }
         })
     }

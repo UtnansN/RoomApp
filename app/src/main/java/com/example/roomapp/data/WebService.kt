@@ -5,11 +5,15 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface WebService {
 
-    @POST("/api/v1/room")
-    suspend fun createRoom(@Body room: Room): Call<Room>
+    @GET("/api/rooms")
+    fun getRooms(): Call<List<Room>>
+
+    @POST("/api/rooms")
+    fun createRoom(@Body room: Room): Call<Room>
 
 }
