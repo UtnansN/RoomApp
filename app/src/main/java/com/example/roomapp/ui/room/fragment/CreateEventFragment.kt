@@ -15,15 +15,17 @@ import androidx.navigation.fragment.findNavController
 import com.example.roomapp.R
 import com.example.roomapp.databinding.FragmentEventCreateBinding
 import com.example.roomapp.ui.room.viewmodel.CreateEventViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.DateFormat
 import java.util.*
 import android.text.format.DateFormat as ContextualDateFormat
 
+@AndroidEntryPoint
 class CreateEventFragment : Fragment() {
 
     private lateinit var viewModel: CreateEventViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         viewModel = ViewModelProvider(this).get(CreateEventViewModel::class.java)
 

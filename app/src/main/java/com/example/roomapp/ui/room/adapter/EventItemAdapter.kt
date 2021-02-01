@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.R
 import com.example.roomapp.Utils
-import com.example.roomapp.data.model.Event
+import com.example.roomapp.data.model.local.Event
 
 class EventItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Event>
 ) : ListAdapter<Event, EventItemAdapter.ViewHolder>(diffCallback) {

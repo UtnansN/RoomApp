@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.roomapp.data.model.Event
-import com.example.roomapp.data.model.Room
+import com.example.roomapp.data.model.local.Event
+import com.example.roomapp.data.model.local.Room
 
 @Dao
 interface RoomDao {

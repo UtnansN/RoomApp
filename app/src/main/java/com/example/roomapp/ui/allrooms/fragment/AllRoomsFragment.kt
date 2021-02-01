@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.R
 import com.example.roomapp.ui.allrooms.adapter.AllRoomsItemAdapter
 import com.example.roomapp.ui.allrooms.viewmodel.AllRoomsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AllRoomsFragment : Fragment() {
 
     private lateinit var viewModel: AllRoomsViewModel
@@ -59,7 +61,7 @@ class AllRoomsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.getUserRooms().observe(viewLifecycleOwner, Observer { rooms ->
+        viewModel.getUserRooms().observe(viewLifecycleOwner, { rooms ->
             rooms?.let { allRoomsItemAdapter.submitList(it) }
         })
     }

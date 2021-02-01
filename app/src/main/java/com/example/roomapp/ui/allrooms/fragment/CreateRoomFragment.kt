@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.roomapp.R
-import com.example.roomapp.data.model.Room
+import com.example.roomapp.data.model.local.Room
 import com.example.roomapp.ui.allrooms.viewmodel.CreateRoomViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CreateRoomFragment : Fragment() {
 
     private lateinit var createRoomViewModel: CreateRoomViewModel

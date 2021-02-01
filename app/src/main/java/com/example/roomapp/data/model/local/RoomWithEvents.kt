@@ -1,7 +1,9 @@
-package com.example.roomapp.data.model
+package com.example.roomapp.data.model.local
 
 import androidx.room.Embedded
 import androidx.room.Relation
+import com.example.roomapp.data.model.local.Event
+import com.example.roomapp.data.model.local.Room
 
 data class RoomWithEvents(
     @Embedded val room: Room,

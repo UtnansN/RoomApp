@@ -3,9 +3,8 @@ package com.example.roomapp
 import android.view.View
 import android.widget.TextView
 
-class Utils {
+object Utils {
 
-    companion object {
         fun setTextOrViewGoneIfBlank(view: TextView, txt: String?) {
             if (txt.isNullOrBlank()) {
                 view.visibility = View.GONE
@@ -20,6 +19,5 @@ class Utils {
                 view.visibility = View.GONE
             }
         }
-    }
 
 }

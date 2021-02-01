@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.roomapp.R
 import com.example.roomapp.ui.room.viewmodel.RoomInfoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RoomInfoFragment : Fragment() {
 
     private lateinit var roomInfoViewModel: RoomInfoViewModel

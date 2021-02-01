@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.roomapp.R
 import com.example.roomapp.ui.allrooms.viewmodel.JoinRoomViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class JoinRoomFragment : Fragment() {
 
     private lateinit var joinRoomViewModel: JoinRoomViewModel

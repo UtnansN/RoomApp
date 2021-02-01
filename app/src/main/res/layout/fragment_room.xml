@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.example.roomapp.ui.room.viewmodel.RoomViewModel" />
@@ -27,6 +26,7 @@
             android:minLines="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textStyle="bold"
+            android:text="@{viewModel.room.name}"
             app:layout_constraintEnd_toStartOf="@+id/btn_room_about"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

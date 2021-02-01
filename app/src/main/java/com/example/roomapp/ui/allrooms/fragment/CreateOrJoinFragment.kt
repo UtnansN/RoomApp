@@ -10,7 +10,9 @@ import com.example.roomapp.R
 import com.example.roomapp.ui.allrooms.adapter.CreateOrJoinViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CreateOrJoinFragment : Fragment() {
 
     private lateinit var viewPager: ViewPager2

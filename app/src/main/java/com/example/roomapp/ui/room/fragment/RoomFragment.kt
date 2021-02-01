@@ -4,16 +4,20 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.roomapp.R
+import com.example.roomapp.databinding.FragmentRoomBinding
 import com.example.roomapp.ui.room.viewmodel.RoomViewModel
 import com.example.roomapp.ui.room.adapter.RoomViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RoomFragment : Fragment() {
 
     private lateinit var roomViewModel: RoomViewModel
@@ -29,19 +33,17 @@ class RoomFragment : Fragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        roomViewModel = ViewModelProvider(this).get(RoomViewModel::class.java)
-
-        val root = inflater.inflate(R.layout.fragment_room, container, false)
-
-        val txtRoomName: TextView = root.findViewById(R.id.room_name)
         val roomId = requireArguments().getInt("roomId")
+        roomViewModel = ViewModelProvider(this).get(RoomViewModel::class.java)
+        roomViewModel.setRoomId(roomId)
 
-        roomViewModel.getRoomData(roomId)
-                .observe(viewLifecycleOwner, {
-            txtRoomName.text = it.name
-        })
+        val binding: FragmentRoomBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_room, container, false)
+        val root = binding.root
+
+        binding.lifecycleOwner = this
+        binding.viewModel = roomViewModel
 
         val roomInfoButton: ImageButton = root.findViewById(R.id.btn_room_about)
         roomInfoButton.setOnClickListener {

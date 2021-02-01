@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.R
 import com.example.roomapp.ui.room.adapter.EventItemAdapter
 import com.example.roomapp.ui.room.viewmodel.EventViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EventFragment: Fragment() {
 
     private lateinit var eventViewModel: EventViewModel
@@ -50,7 +52,7 @@ class EventFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        eventViewModel.getEvents().observe(viewLifecycleOwner, {
+        eventViewModel.allEvents.observe(viewLifecycleOwner, {
                 events -> events?.let { eventItemAdapter.submitList(it) }
         })
     }

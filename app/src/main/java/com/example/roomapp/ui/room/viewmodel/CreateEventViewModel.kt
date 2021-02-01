@@ -3,15 +3,15 @@ package com.example.roomapp.ui.room.viewmodel
 import android.app.Application
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.roomapp.data.AppDatabase
-import com.example.roomapp.data.model.Event
+import com.example.roomapp.data.LocalDatabase
+import com.example.roomapp.data.model.local.Event
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CreateEventViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val database = AppDatabase.getInstance(application.applicationContext)
+@HiltViewModel
+class CreateEventViewModel @Inject constructor(private val database: LocalDatabase): ViewModel() {
 
     val name = ObservableField("")
     val description = ObservableField("")

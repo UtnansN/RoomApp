@@ -2,12 +2,17 @@ package com.example.roomapp.ui.allrooms.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.roomapp.data.AppDatabase
-import com.example.roomapp.data.model.Room
+import androidx.lifecycle.ViewModel
+import com.example.roomapp.data.LocalDatabase
+import com.example.roomapp.data.model.local.Room
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CreateRoomViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class CreateRoomViewModel @Inject constructor(private val database: LocalDatabase): ViewModel() {
 
-    private var database: AppDatabase = AppDatabase.getInstance(application.applicationContext)
+//    private var database: LocalDatabase = LocalDatabase.getInstance(application.applicationContext)
 
     fun addRoom(room: Room) {
         database.roomDao().insert(room)

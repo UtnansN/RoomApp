@@ -1,6 +1,6 @@
 package com.example.roomapp.data
 
-import com.example.roomapp.data.model.LoggedInUser
+import com.example.roomapp.data.model.local.LoggedInUser
 
 /**
  * Class that requests authentication and user information from the remote data source and

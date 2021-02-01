@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomapp.R
-import com.example.roomapp.data.model.Room
+import com.example.roomapp.data.model.local.Room
 
 class AllRoomsItemAdapter(@NonNull diffCallback: DiffUtil.ItemCallback<Room>,
                           private val clickListener: (Room) -> Unit

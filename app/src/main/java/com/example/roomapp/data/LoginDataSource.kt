@@ -1,6 +1,6 @@
 package com.example.roomapp.data
 
-import com.example.roomapp.data.model.LoggedInUser
+import com.example.roomapp.data.model.local.LoggedInUser
 import java.io.IOException
 import java.util.*
 
