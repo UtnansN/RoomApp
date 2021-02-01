@@ -50,7 +50,7 @@ class EventFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        eventViewModel.getEvents().observe(viewLifecycleOwner, Observer {
+        eventViewModel.getEvents().observe(viewLifecycleOwner, {
                 events -> events?.let { eventItemAdapter.submitList(it) }
         })
     }

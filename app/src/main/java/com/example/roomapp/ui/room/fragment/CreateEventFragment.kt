@@ -44,7 +44,7 @@ class CreateEventFragment : Fragment() {
             val hour = calendar[Calendar.HOUR_OF_DAY]
             val minute = calendar[Calendar.MINUTE]
 
-            val timePicker = TimePickerDialog(requireContext(), TimePickerDialog.OnTimeSetListener {
+            val timePicker = TimePickerDialog(requireContext(), {
                     _, selectedHour, selectedMinute ->
                 val format = ContextualDateFormat.getTimeFormat(requireContext())
 
@@ -62,7 +62,7 @@ class CreateEventFragment : Fragment() {
             val month = calendar[Calendar.MONTH]
             val year = calendar[Calendar.YEAR]
 
-            val datePicker = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener {
+            val datePicker = DatePickerDialog(requireContext(), {
                     _, selectedYear, selectedMonth, selectedDay ->
                 // Date displayed is always in English. Time format depends on system settings.
                 val format = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.ENGLISH)

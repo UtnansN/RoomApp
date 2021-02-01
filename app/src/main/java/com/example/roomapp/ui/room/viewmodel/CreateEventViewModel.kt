@@ -13,11 +13,11 @@ class CreateEventViewModel(application: Application) : AndroidViewModel(applicat
 
     private val database = AppDatabase.getInstance(application.applicationContext)
 
-    val name = ObservableField<String>("")
-    val description = ObservableField<String>("")
-    val time = ObservableField<String>("")
-    val date = ObservableField<String>("")
-    val location = ObservableField<String>("")
+    val name = ObservableField("")
+    val description = ObservableField("")
+    val time = ObservableField("")
+    val date = ObservableField("")
+    val location = ObservableField("")
 
     fun submitData(roomId: Int) {
         val event = Event(

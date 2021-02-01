@@ -5,7 +5,6 @@ import android.view.*
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -40,7 +39,7 @@ class RoomFragment : Fragment() {
         val roomId = requireArguments().getInt("roomId")
 
         roomViewModel.getRoomData(roomId)
-                .observe(viewLifecycleOwner, Observer {
+                .observe(viewLifecycleOwner, {
             txtRoomName.text = it.name
         })
 
