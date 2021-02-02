@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/fragment_margin"
+    tools:context=".ui.userspaces.fragment.AllSpacesFragment">
+
+    <FrameLayout
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:background="@drawable/circle_mask">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            tools:src="@tools:sample/avatars" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/space_name"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/space_info_description"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:gravity="center_vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:gravity="center_vertical"
+        android:text="@string/members"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/space_info_members"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

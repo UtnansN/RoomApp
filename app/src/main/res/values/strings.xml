@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">RoomApp</string>
+    <string name="app_name">Space App</string>
     <string name="title_home">Home</string>
-    <string name="title_my_rooms">My Rooms</string>
+    <string name="title_my_spaces">My Spaces</string>
     <string name="title_inbox">Inbox</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="events">Events</string>
     <string name="placeholder">Placeholder</string>
     <string name="discussions">Discussions</string>
@@ -24,12 +23,12 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="members">Members</string>
-    <string name="create_a_room">Create a room</string>
-    <string name="join_a_room">Join a room</string>
-    <string name="room_name">Name</string>
+    <string name="create_a_space">Create a space</string>
+    <string name="join_a_space">Join a space</string>
+    <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="submit">Submit</string>
-    <string name="room_code">Room Code</string>
+    <string name="space_code">Space Code</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

@@ -3,64 +3,63 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_my_rooms">
+    app:startDestination="@+id/navigation_my_spaces">
 
     <fragment
-        android:id="@+id/navigation_my_rooms"
-        android:name="com.example.roomapp.ui.allrooms.fragment.AllRoomsFragment"
-        android:label="@string/title_my_rooms"
-        tools:layout="@layout/fragment_room_join">
+        android:id="@+id/navigation_my_spaces"
+        android:name="com.example.spaceapp.ui.userspaces.fragment.AllSpacesFragment"
+        android:label="@string/title_my_spaces"
+        tools:layout="@layout/fragment_space_join">
         <action
-            android:id="@+id/action_navigation_my_rooms_to_specific_room"
-            app:destination="@id/navigation_room"
+            android:id="@+id/action_navigation_my_spaces_to_specific_space"
+            app:destination="@id/navigation_space"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
         <action
-            android:id="@+id/action_navigation_my_rooms_to_createJoinFragment"
-            app:destination="@id/navigation_room_join_create" />
+            android:id="@+id/action_navigation_my_spaces_to_space_join_or_create"
+            app:destination="@id/navigation_space_join_create" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_room"
-        android:name="com.example.roomapp.ui.room.fragment.RoomFragment"
-        android:label="Room">
+        android:id="@+id/navigation_space"
+        android:name="com.example.spaceapp.ui.exactspace.fragment.SpaceFragment"
+        android:label="Space">
 
         <argument
-            android:name="roomId"
+            android:name="spaceId"
             app:argType="integer" />
         <action
-            android:id="@+id/action_navigation_room_to_roomInfoFragment"
-            app:destination="@id/navigation_room_info" />
+            android:id="@+id/action_navigation_space_to_space_info"
+            app:destination="@id/navigation_space_info" />
         <action
-            android:id="@+id/action_navigation_room_to_navigation_create_event"
+            android:id="@+id/action_navigation_space_to_create_event"
             app:destination="@id/navigation_create_event" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_room_join_create"
-        android:name="com.example.roomapp.ui.allrooms.fragment.CreateOrJoinFragment"
-        android:label="Join Room" >
+        android:id="@+id/navigation_space_join_create"
+        android:name="com.example.spaceapp.ui.userspaces.fragment.CreateOrJoinFragment"
+        android:label="Join Space">
         <action
-            android:id="@+id/action_navigation_room_join_create_to_navigation_my_rooms"
-            app:destination="@id/navigation_my_rooms" />
+            android:id="@+id/action_navigation_space_join_create_to_my_spaces"
+            app:destination="@id/navigation_my_spaces" />
     </fragment>
     <fragment
-        android:id="@+id/navigation_room_info"
-        android:name="com.example.roomapp.ui.room.fragment.RoomInfoFragment"
-        android:label="Room Information">
+        android:id="@+id/navigation_space_info"
+        android:name="com.example.spaceapp.ui.exactspace.fragment.SpaceInfoFragment"
+        android:label="Space Information">
         <action
-            android:id="@+id/action_roomInfoFragment_to_navigation_room"
-            app:destination="@id/navigation_room" />
+            android:id="@+id/action_navigation_space_info_to_room"
+            app:destination="@id/navigation_space" />
     </fragment>
     <fragment
         android:id="@+id/navigation_create_event"
-        android:name="com.example.roomapp.ui.room.fragment.CreateEventFragment"
+        android:name="com.example.spaceapp.ui.exactspace.fragment.CreateEventFragment"
         android:label="Create an event">
         <argument
-            android:name="roomId"
-            android:defaultValue="-1"
+            android:name="spaceId"
             app:argType="integer" />
     </fragment>
 

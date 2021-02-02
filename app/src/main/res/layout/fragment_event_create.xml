@@ -5,11 +5,11 @@
 
     <data>
         <variable
-            name="roomId"
+            name="spaceId"
             type="Integer"/>
         <variable
             name="viewmodel"
-            type="com.example.roomapp.ui.room.viewmodel.CreateEventViewModel" />
+            type="com.example.spaceapp.ui.exactspace.viewmodel.CreateEventViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
