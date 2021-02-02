@@ -17,8 +17,8 @@ interface SpaceDao {
     @Query("SELECT * FROM space ORDER BY name")
     fun getAll(): LiveData<List<Space>>
 
-    @Query("SELECT * FROM event WHERE spaceId=:spaceId")
-    fun getEventsForSpace(spaceId: Int): LiveData<List<Event>>
+    @Query("SELECT * FROM event WHERE id=:spaceId")
+    fun getEventsForSpace(spaceId: String): LiveData<List<Event>>
 
     @Insert
     fun insert(space: Space)

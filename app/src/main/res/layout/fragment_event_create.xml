@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="spaceId"
-            type="Integer"/>
+            name="spaceCode"
+            type="String"/>
         <variable
             name="viewmodel"
             type="com.example.spaceapp.ui.exactspace.viewmodel.CreateEventViewModel" />

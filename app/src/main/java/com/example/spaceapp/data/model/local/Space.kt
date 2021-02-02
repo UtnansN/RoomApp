@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Space (
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey val id: String,
     val name: String,
     val description: String?,
     val spaceCode: String?

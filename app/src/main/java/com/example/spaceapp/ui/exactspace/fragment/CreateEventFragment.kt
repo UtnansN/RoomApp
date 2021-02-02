@@ -33,10 +33,11 @@ class CreateEventFragment : Fragment() {
                 inflater, R.layout.fragment_event_create, container, false)
 
         val root = binding.root
-        val spaceId = requireArguments().getInt("spaceId")
+        val spaceCode = requireArguments().getString("spaceCode").orEmpty()
 
         binding.lifecycleOwner = this
         binding.viewmodel = viewModel
+        binding.spaceCode = spaceCode
 
         val txtTime: EditText = root.findViewById(R.id.txt_event_create_time)
         val txtDate: EditText = root.findViewById(R.id.txt_event_create_date)
@@ -76,7 +77,7 @@ class CreateEventFragment : Fragment() {
 
         val btnSubmit: Button = root.findViewById(R.id.btn_create_event)
         btnSubmit.setOnClickListener {
-            viewModel.submitData(spaceId)
+            viewModel.submitData(spaceCode)
             findNavController().popBackStack()
         }
 

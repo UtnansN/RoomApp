@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceapp.R
+import com.example.spaceapp.data.model.remote.Resource
 import com.example.spaceapp.ui.userspaces.adapter.AllSpacesItemAdapter
 import com.example.spaceapp.ui.userspaces.viewmodel.AllSpacesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,11 +31,12 @@ class AllSpacesFragment : Fragment() {
 
         viewModel =
             ViewModelProvider(requireActivity()).get(AllSpacesViewModel::class.java)
+        viewModel.invokeSpaceUpdate()
 
         val root = inflater.inflate(R.layout.fragment_itemlist, container, false)
 
         allSpacesItemAdapter = AllSpacesItemAdapter(AllSpacesItemAdapter.SpaceDiff()) {
-            val action = AllSpacesFragmentDirections.actionNavigationMySpacesToSpecificSpace(it.id)
+            val action = AllSpacesFragmentDirections.actionNavigationMySpacesToSpecificSpace(it.code)
             findNavController().navigate(action)
         }
 
@@ -56,8 +59,14 @@ class AllSpacesFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.allSpaces.observe(viewLifecycleOwner, { spaces ->
-            spaces?.let { allSpacesItemAdapter.submitList(it) }
+        viewModel.allSpaces.observe(viewLifecycleOwner, {
+            when (it.status) {
+                Resource.Status.SUCCESS -> {
+                    it.data?.let { spaces -> allSpacesItemAdapter.submitList(spaces) }
+                }
+                Resource.Status.ERROR -> Toast.makeText(activity, it.message, Toast.LENGTH_SHORT).show()
+                Resource.Status.LOADING -> {}
+            }
         })
     }
 

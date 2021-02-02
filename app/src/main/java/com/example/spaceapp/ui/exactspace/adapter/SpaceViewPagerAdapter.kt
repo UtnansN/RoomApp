@@ -7,7 +7,7 @@ import com.example.spaceapp.ui.exactspace.fragment.DiscussionFragment
 import com.example.spaceapp.ui.exactspace.fragment.EventFragment
 import java.lang.IllegalStateException
 
-class SpaceViewPagerAdapter(fragment: Fragment, private val spaceId: Int) : FragmentStateAdapter(fragment) {
+class SpaceViewPagerAdapter(fragment: Fragment, private val spaceCode: String) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int {
         return 2
@@ -20,7 +20,7 @@ class SpaceViewPagerAdapter(fragment: Fragment, private val spaceId: Int) : Frag
             else -> throw IllegalStateException("Invalid adapter position")
         }
         val args = Bundle()
-        args.putInt("spaceId", spaceId)
+        args.putString("spaceCode", spaceCode)
         fragment.arguments = args
         return fragment
     }

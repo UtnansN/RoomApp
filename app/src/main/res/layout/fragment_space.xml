@@ -26,7 +26,7 @@
             android:minLines="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textStyle="bold"
-            android:text="@{viewModel.space.name}"
+            android:text="@{viewModel.space.component2().name}"
             app:layout_constraintEnd_toStartOf="@+id/btn_space_about"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

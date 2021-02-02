@@ -24,6 +24,7 @@ class SpaceFragment : Fragment() {
     private lateinit var spaceViewModel: SpaceViewModel
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
+    private lateinit var spaceCode: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +37,10 @@ class SpaceFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
 
-        val spaceId = requireArguments().getInt("spaceId")
+        spaceCode = requireArguments().getString("spaceCode")!!
+
         spaceViewModel = ViewModelProvider(this).get(SpaceViewModel::class.java)
-        spaceViewModel.setSpaceId(spaceId)
+        spaceViewModel.setSpaceId(spaceCode)
 
         val binding: FragmentSpaceBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_space, container, false)
         val root = binding.root
@@ -60,7 +62,7 @@ class SpaceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewPager.adapter =
-            SpaceViewPagerAdapter(this, requireArguments().getInt("spaceId"))
+            SpaceViewPagerAdapter(this, spaceCode)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
                 0 -> tab.text = resources.getString(R.string.events)
@@ -68,6 +70,5 @@ class SpaceFragment : Fragment() {
             }
         }.attach()
     }
-
 
 }

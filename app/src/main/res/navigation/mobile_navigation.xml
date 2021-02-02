@@ -28,8 +28,8 @@
         android:label="Space">
 
         <argument
-            android:name="spaceId"
-            app:argType="integer" />
+            android:name="spaceCode"
+            app:argType="string" />
         <action
             android:id="@+id/action_navigation_space_to_space_info"
             app:destination="@id/navigation_space_info" />
@@ -59,8 +59,8 @@
         android:name="com.example.spaceapp.ui.exactspace.fragment.CreateEventFragment"
         android:label="Create an event">
         <argument
-            android:name="spaceId"
-            app:argType="integer" />
+            android:name="spaceCode"
+            app:argType="string" />
     </fragment>
 
 </navigation>

@@ -36,7 +36,7 @@ class CreateSpaceFragment : Fragment() {
         val submitBtn = root.findViewById<Button>(R.id.btn_create_space)
         submitBtn.setOnClickListener {
             val room = Space(
-                    id = 0,
+                    id = "GUH",
                     name = spaceNameEditBox.text.toString(),
                     description = spaceDescriptionEditBox.text.toString(),
                     spaceCode = "ASDF"

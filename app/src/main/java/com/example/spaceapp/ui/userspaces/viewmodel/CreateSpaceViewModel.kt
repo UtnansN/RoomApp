@@ -17,7 +17,6 @@ class CreateSpaceViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun addRoom(space: Space) {
-        database.spaceDao().insert(space)
         val call = appRepository.createSpace(space)
 
         call.enqueue(object : Callback<Space> {
