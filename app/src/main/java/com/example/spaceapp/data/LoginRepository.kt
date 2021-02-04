@@ -1,46 +1,52 @@
 package com.example.spaceapp.data
 
+import android.content.SharedPreferences
+import androidx.lifecycle.MutableLiveData
+import com.auth0.android.jwt.JWT
+import com.example.spaceapp.Constants
+import com.example.spaceapp.CredentialCache
 import com.example.spaceapp.data.model.local.LoggedInUser
+import com.example.spaceapp.data.model.remote.auth.LoginDTO
+import com.example.spaceapp.data.model.remote.Resource
+import com.example.spaceapp.data.model.remote.auth.LoginResponseDTO
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import javax.inject.Inject
 
-/**
- * Class that requests authentication and user information from the remote data source and
- * maintains an in-memory cache of login status and user credentials information.
- */
+class LoginRepository @Inject constructor(
+    private val webService: WebService,
+    private val credentialCache: CredentialCache
+) {
 
-class LoginRepository(val dataSource: LoginDataSource) {
+    fun login(
+        holder: MutableLiveData<Resource<LoginResponseDTO>>,
+        email: String,
+        password: String
+    ) {
+        holder.value = Resource.loading()
 
-    // in-memory cache of the loggedInUser object
-    var user: LoggedInUser? = null
-        private set
+        val call = webService.login(LoginDTO(email, password))
+        call.enqueue(object : Callback<LoginResponseDTO> {
+            override fun onResponse(
+                call: Call<LoginResponseDTO>,
+                response: Response<LoginResponseDTO>
+            ) {
+                if (response.body() != null) {
+                    holder.value = Resource.success(response.body()!!)
+                } else {
+                    holder.value = Resource.error(response.code().toString())
+                }
+            }
 
-    val isLoggedIn: Boolean
-        get() = user != null
-
-    init {
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
-        user = null
+            override fun onFailure(call: Call<LoginResponseDTO>, t: Throwable) {
+                holder.value = Resource.error(t.message.orEmpty())
+            }
+        })
     }
 
-    fun logout() {
-        user = null
-        dataSource.logout()
+    fun setLoggedInUser(userName: String, password: String, token: String) {
+        credentialCache.setLoggedInUser(userName, password, token)
     }
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
-        // handle login
-        val result = dataSource.login(username, password)
-
-        if (result is Result.Success) {
-            setLoggedInUser(result.data)
-        }
-
-        return result
-    }
-
-    private fun setLoggedInUser(loggedInUser: LoggedInUser) {
-        this.user = loggedInUser
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
-    }
 }

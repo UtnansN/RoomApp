@@ -2,6 +2,7 @@ package com.example.spaceapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.spaceapp.CredentialCache
 import com.example.spaceapp.data.model.local.Space
 import com.example.spaceapp.data.model.remote.EventDTO
 import com.example.spaceapp.data.model.remote.Resource
@@ -13,7 +14,7 @@ import javax.inject.Inject
 
 class AppRepository @Inject constructor(
     private val webService: WebService,
-    private val localDatabase: LocalDatabase
+    private val credentialCache: CredentialCache
 ) {
 
     fun createSpace(space: Space): Call<Space> {
@@ -29,12 +30,14 @@ class AppRepository @Inject constructor(
         return output
     }
 
-    fun fetchSpace(code: String): LiveData<Resource<Space>> {
-        val output = getResourceObservable<Space>()
-
+    fun fetchSpace(holder: MutableLiveData<Resource<Space>>, code: String) {
         val call = webService.getSpace(code)
-        call.enqueue(genericCallback(output))
-        return output
+        call.enqueue(genericCallback(holder))
+    }
+
+    fun joinSpace(holder: MutableLiveData<Resource<Void>>, code: String) {
+        val call = webService.joinSpace(code)
+        call.enqueue(genericCallback(holder))
     }
 
     fun fetchEventsInSpace(code: String): LiveData<Resource<List<EventDTO>>> {
@@ -58,10 +61,12 @@ class AppRepository @Inject constructor(
         return object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
                 val body = response.body()
-                if (response.isSuccessful && body != null) {
+                if (response.isSuccessful) {
                     output.value = Resource.success(body)
-                }
-                else {
+                } else {
+                    if (response.code() == 401) {
+                        credentialCache.invalidateUser()
+                    }
                     output.value = Resource.error(response.message())
                 }
             }

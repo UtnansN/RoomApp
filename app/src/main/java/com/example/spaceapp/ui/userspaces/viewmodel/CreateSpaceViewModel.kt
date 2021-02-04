@@ -13,7 +13,6 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateSpaceViewModel @Inject constructor(
     private val appRepository: AppRepository,
-    private val database: LocalDatabase
 ) : ViewModel() {
 
     fun addRoom(space: Space) {

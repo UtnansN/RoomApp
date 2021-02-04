@@ -1,7 +1,8 @@
-package com.example.spaceapp
+package com.example.spaceapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.spaceapp.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

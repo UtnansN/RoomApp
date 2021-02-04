@@ -33,7 +33,7 @@ class CreateSpaceFragment : Fragment() {
         val spaceNameEditBox = root.findViewById<EditText>(R.id.txt_create_space_name)
         val spaceDescriptionEditBox = root.findViewById<EditText>(R.id.txt_create_space_description)
 
-        val submitBtn = root.findViewById<Button>(R.id.btn_create_space)
+        val submitBtn = root.findViewById<Button>(R.id.btn_join_space)
         submitBtn.setOnClickListener {
             val room = Space(
                     id = "GUH",

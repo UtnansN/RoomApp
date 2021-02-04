@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -23,7 +24,10 @@ class EventFragment : Fragment() {
     private lateinit var eventViewModel: EventViewModel
     private lateinit var eventRecyclerView: RecyclerView
     private lateinit var eventItemAdapter: EventItemAdapter
+    private lateinit var emptyView: LinearLayout
+
     private lateinit var spaceCode: String
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +50,8 @@ class EventFragment : Fragment() {
             adapter = eventItemAdapter
         }
 
+        emptyView = root.findViewById(R.id.rec_emptyview)
+
         val addEventFab: View = root.findViewById(R.id.fab_add_item)
         addEventFab.setOnClickListener {
             val bundle = bundleOf("spaceCode" to spaceCode)
@@ -61,7 +67,13 @@ class EventFragment : Fragment() {
         eventViewModel.allEvents.observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
-                    it.data?.let { events -> eventItemAdapter.submitList(events) }
+                    if (it.data != null && it.data.isNotEmpty()) {
+                        emptyView.visibility = View.GONE
+                        it.data.let { events -> eventItemAdapter.submitList(events) }
+                    }
+                    else {
+                        emptyView.visibility = View.VISIBLE
+                    }
                 }
                 Resource.Status.ERROR -> Toast.makeText(activity, it.message, Toast.LENGTH_SHORT)
                     .show()

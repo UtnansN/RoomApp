@@ -64,6 +64,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation 'com.auth0.android:jwtdecode:2.0.0'
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
     kapt "androidx.room:room-compiler:$room_version"
     testImplementation 'junit:junit:4.13.1'

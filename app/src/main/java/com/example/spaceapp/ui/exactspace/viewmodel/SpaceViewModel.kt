@@ -14,9 +14,10 @@ import javax.inject.Inject
 @HiltViewModel
 class SpaceViewModel @Inject constructor(private val appRepository: AppRepository): ViewModel() {
 
-    var space: LiveData<Resource<Space>> = MutableLiveData()
+    private val _space: MutableLiveData<Resource<Space>> = MutableLiveData(Resource.loading())
+    var space: LiveData<Resource<Space>> = _space
 
     fun setSpaceId(spaceId: String) {
-        space = appRepository.fetchSpace(spaceId)
+        appRepository.fetchSpace(_space, spaceId)
     }
 }
