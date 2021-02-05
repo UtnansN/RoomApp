@@ -31,7 +31,7 @@ interface WebService {
     @GET("/api/spaces/{spaceCode}/events")
     fun getEventsInSpace(@Path("spaceCode") spaceCode: String): Call<List<EventDTO>>
 
-    @POST("/api/spaces/{spaceCode}/event")
+    @POST("/api/spaces/{spaceCode}/events")
     fun createEvent(@Body event: EventDTO, @Path("spaceCode") spaceCode: String): Call<EventDTO>
 
     @POST(Constants.DEST_LOGIN)

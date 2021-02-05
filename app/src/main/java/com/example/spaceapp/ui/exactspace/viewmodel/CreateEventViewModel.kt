@@ -2,6 +2,7 @@ package com.example.spaceapp.ui.exactspace.viewmodel
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.spaceapp.data.AppRepository
 import com.example.spaceapp.data.model.remote.EventDTO
@@ -18,7 +19,8 @@ class CreateEventViewModel @Inject constructor(private val appRepository: AppRep
     val date = ObservableField("")
     val location = ObservableField("")
 
-    lateinit var eventResource: LiveData<Resource<EventDTO>>
+    private val _eventResource: MutableLiveData<Resource<EventDTO>> = MutableLiveData()
+    val eventResource: LiveData<Resource<EventDTO>> = _eventResource
 
     fun submitData(spaceCode: String) {
         val event = EventDTO(
@@ -29,7 +31,7 @@ class CreateEventViewModel @Inject constructor(private val appRepository: AppRep
                 location = location.get(),
         )
 
-        eventResource = appRepository.createEvent(event, spaceCode)
+        appRepository.createEvent(_eventResource, event, spaceCode)
     }
 
     private fun convertToDateTimeString(date: String, time: String): String {

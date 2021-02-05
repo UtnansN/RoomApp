@@ -1,11 +1,6 @@
 package com.example.spaceapp.data
 
-import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
-import com.auth0.android.jwt.JWT
-import com.example.spaceapp.Constants
-import com.example.spaceapp.CredentialCache
-import com.example.spaceapp.data.model.local.LoggedInUser
 import com.example.spaceapp.data.model.remote.auth.LoginDTO
 import com.example.spaceapp.data.model.remote.Resource
 import com.example.spaceapp.data.model.remote.auth.LoginResponseDTO

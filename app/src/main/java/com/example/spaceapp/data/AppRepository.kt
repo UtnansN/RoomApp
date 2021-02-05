@@ -2,7 +2,6 @@ package com.example.spaceapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.spaceapp.CredentialCache
 import com.example.spaceapp.data.model.local.Space
 import com.example.spaceapp.data.model.remote.EventDTO
 import com.example.spaceapp.data.model.remote.Resource
@@ -17,68 +16,55 @@ class AppRepository @Inject constructor(
     private val credentialCache: CredentialCache
 ) {
 
-    fun createSpace(space: Space): Call<Space> {
-        return webService.createSpace(space)
+    fun createSpace(holder: MutableLiveData<Resource<Space>>, space: Space) {
+        val call = webService.createSpace(space)
+        call.enqueue(genericDataUpdaterCallback(holder))
     }
 
-    fun fetchUserSpaces(): LiveData<Resource<List<UserSpacesDTO>>> {
-
-        val output = getResourceObservable<List<UserSpacesDTO>>()
-
+    fun fetchUserSpaces(holder: MutableLiveData<Resource<List<UserSpacesDTO>>>) {
         val call = webService.getSpaces()
-        call.enqueue(genericCallback(output))
-        return output
+        call.enqueue(genericDataUpdaterCallback(holder))
     }
 
     fun fetchSpace(holder: MutableLiveData<Resource<Space>>, code: String) {
         val call = webService.getSpace(code)
-        call.enqueue(genericCallback(holder))
+        call.enqueue(genericDataUpdaterCallback(holder))
     }
 
     fun joinSpace(holder: MutableLiveData<Resource<Void>>, code: String) {
         val call = webService.joinSpace(code)
-        call.enqueue(genericCallback(holder))
+        call.enqueue(genericDataUpdaterCallback(holder))
     }
 
-    fun fetchEventsInSpace(code: String): LiveData<Resource<List<EventDTO>>> {
-        val output = getResourceObservable<List<EventDTO>>()
-
+    fun fetchEventsInSpace(holder: MutableLiveData<Resource<List<EventDTO>>>, code: String) {
         val call = webService.getEventsInSpace(code)
-        call.enqueue(genericCallback(output))
-        return output
+        call.enqueue(genericDataUpdaterCallback(holder))
     }
 
-    fun createEvent(event: EventDTO, spaceCode: String): LiveData<Resource<EventDTO>> {
-        val output = getResourceObservable<EventDTO>()
-
+    fun createEvent(holder: MutableLiveData<Resource<EventDTO>>, event: EventDTO, spaceCode: String) {
         val call = webService.createEvent(event, spaceCode)
-        call.enqueue(genericCallback(output))
-        return output
+        call.enqueue(genericDataUpdaterCallback(holder))
     }
 
-    private fun <T> genericCallback(output: MutableLiveData<Resource<T>>): Callback<T> {
+    private fun <T> genericDataUpdaterCallback(holder: MutableLiveData<Resource<T>>): Callback<T> {
 
         return object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
                 val body = response.body()
                 if (response.isSuccessful) {
-                    output.value = Resource.success(body)
+                    holder.value = Resource.success(body)
                 } else {
                     if (response.code() == 401) {
                         credentialCache.invalidateUser()
                     }
-                    output.value = Resource.error(response.message())
+                    holder.value = Resource.error(response.message())
                 }
             }
 
             override fun onFailure(call: Call<T>, t: Throwable) {
-                output.value = Resource.error(t.message.orEmpty())
+                holder.value = Resource.error(t.message.orEmpty())
             }
         }
-    }
-
-    private fun <T> getResourceObservable(): MutableLiveData<Resource<T>> {
-        return MutableLiveData<Resource<T>>(Resource.loading())
     }
 
 }

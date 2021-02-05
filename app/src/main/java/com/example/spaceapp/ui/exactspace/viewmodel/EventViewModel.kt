@@ -16,20 +16,20 @@ import javax.inject.Inject
 class EventViewModel @Inject constructor(private val appRepository: AppRepository): ViewModel() {
 
     private var spaceCode = MutableLiveData<String>(null)
-    var allEvents: LiveData<Resource<List<EventDTO>>> = Transformations.switchMap(spaceCode) {
-        println("Called transformation!")
-        appRepository.fetchEventsInSpace(it)
-    }
+    private var _allEvents: MutableLiveData<Resource<List<EventDTO>>> = MutableLiveData(Resource.loading())
+    var allEvents: LiveData<Resource<List<EventDTO>>> = _allEvents
 
     fun setSpaceCode(code: String) {
-        println("Called set!")
-        if (spaceCode.value != code) {
+        if (spaceCode.value == null || spaceCode.value != code) {
             spaceCode.value = code
+            refreshEvents()
         }
     }
 
-    private fun refreshEvents(code: String) {
-        allEvents = appRepository.fetchEventsInSpace(code)
+    private fun refreshEvents() {
+        if (spaceCode.value != null) {
+            appRepository.fetchEventsInSpace(_allEvents, spaceCode.value.toString())
+        }
     }
 
 }

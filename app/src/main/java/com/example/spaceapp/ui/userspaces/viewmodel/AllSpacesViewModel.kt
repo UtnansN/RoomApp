@@ -15,11 +15,12 @@ import javax.inject.Inject
 @HiltViewModel
 class AllSpacesViewModel @Inject constructor(private val repository: AppRepository) : ViewModel() {
 
-    lateinit var allSpaces: LiveData<Resource<List<UserSpacesDTO>>>
+    private val _allSpaces: MutableLiveData<Resource<List<UserSpacesDTO>>> = MutableLiveData()
+    var allSpaces: LiveData<Resource<List<UserSpacesDTO>>> = _allSpaces
 
 
     fun invokeSpaceUpdate() {
-        allSpaces = repository.fetchUserSpaces()
+        repository.fetchUserSpaces(_allSpaces)
     }
 
 }

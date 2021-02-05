@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.spaceapp.R
 import com.example.spaceapp.data.model.local.Space
+import com.example.spaceapp.data.model.remote.Resource
 import com.example.spaceapp.ui.userspaces.viewmodel.CreateSpaceViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,11 +40,24 @@ class CreateSpaceFragment : Fragment() {
                     id = "GUH",
                     name = spaceNameEditBox.text.toString(),
                     description = spaceDescriptionEditBox.text.toString(),
-                    spaceCode = "ASDF"
+                    spaceCode = null
             )
             createSpaceViewModel.addRoom(room)
-            findNavController().navigate(R.id.action_navigation_space_join_create_to_my_spaces)
         }
+
+        createSpaceViewModel.createSpaceStatus.observe(viewLifecycleOwner, {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    submitBtn.isEnabled = false
+                }
+                Resource.Status.SUCCESS -> {
+                    findNavController().navigate(R.id.action_navigation_space_join_create_to_my_spaces)
+                }
+                Resource.Status.ERROR -> {
+                    submitBtn.isEnabled = true
+                }
+            }
+        })
 
         return root
     }

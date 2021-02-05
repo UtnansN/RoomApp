@@ -1,8 +1,8 @@
-package com.example.spaceapp
+package com.example.spaceapp.data
 
 import android.content.SharedPreferences
 import com.auth0.android.jwt.JWT
-import com.example.spaceapp.data.LoginPreferences
+import com.example.spaceapp.Constants
 import com.example.spaceapp.data.model.remote.auth.LoginDTO
 import javax.inject.Inject
 
