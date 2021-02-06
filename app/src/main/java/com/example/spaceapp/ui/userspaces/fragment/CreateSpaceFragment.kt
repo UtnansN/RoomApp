@@ -51,7 +51,7 @@ class CreateSpaceFragment : Fragment() {
                     submitBtn.isEnabled = false
                 }
                 Resource.Status.SUCCESS -> {
-                    findNavController().navigate(R.id.action_navigation_space_join_create_to_my_spaces)
+                    findNavController().navigateUp()
                 }
                 Resource.Status.ERROR -> {
                     submitBtn.isEnabled = true

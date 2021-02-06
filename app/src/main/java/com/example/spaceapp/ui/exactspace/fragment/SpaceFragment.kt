@@ -1,9 +1,7 @@
 package com.example.spaceapp.ui.exactspace.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageButton
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -31,6 +29,20 @@ class SpaceFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.findItem(R.id.menu_info).isVisible = true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_info -> findNavController()
+                .navigate(SpaceFragmentDirections.actionNavigationSpaceToSpaceInfo())
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
+    }
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -47,11 +59,6 @@ class SpaceFragment : Fragment() {
 
         binding.lifecycleOwner = this
         binding.viewModel = spaceViewModel
-
-        val spaceInfoButton: ImageButton = root.findViewById(R.id.btn_space_about)
-        spaceInfoButton.setOnClickListener {
-            findNavController().navigate(SpaceFragmentDirections.actionNavigationSpaceToSpaceInfo())
-        }
 
         tabLayout = root.findViewById(R.id.tabpager_tabs)
         viewPager = root.findViewById(R.id.tabpager_pager)

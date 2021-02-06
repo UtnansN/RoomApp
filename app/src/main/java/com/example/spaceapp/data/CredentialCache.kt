@@ -3,7 +3,7 @@ package com.example.spaceapp.data
 import android.content.SharedPreferences
 import com.auth0.android.jwt.JWT
 import com.example.spaceapp.Constants
-import com.example.spaceapp.data.model.remote.auth.LoginDTO
+import com.example.spaceapp.auth.dto.LoginDTO
 import javax.inject.Inject
 
 class CredentialCache @Inject constructor(@LoginPreferences private val loginPreferences: SharedPreferences) {
@@ -34,7 +34,7 @@ class CredentialCache @Inject constructor(@LoginPreferences private val loginPre
         val token = getCurrentToken() ?: return true
 
         val jwt = JWT(token)
-        return jwt.isExpired(60)
+        return jwt.isExpired(0)
     }
 
     fun getLoginDTO(): LoginDTO {
@@ -53,6 +53,7 @@ class CredentialCache @Inject constructor(@LoginPreferences private val loginPre
         editor.remove(Constants.PREF_PASSWORD)
         editor.remove(Constants.PREF_TOKEN)
         editor.apply()
+        token = null
     }
 
 }

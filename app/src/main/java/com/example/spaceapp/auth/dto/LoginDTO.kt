@@ -1,4 +1,4 @@
-package com.example.spaceapp.data.model.remote.auth
+package com.example.spaceapp.auth.dto
 
 data class LoginDTO(
     val email: String,

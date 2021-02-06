@@ -1,9 +1,7 @@
 package com.example.spaceapp.ui.exactspace.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -52,11 +50,11 @@ class EventFragment : Fragment() {
 
         emptyView = root.findViewById(R.id.rec_emptyview)
 
-        val addEventFab: View = root.findViewById(R.id.fab_add_item)
-        addEventFab.setOnClickListener {
-            val bundle = bundleOf("spaceCode" to spaceCode)
-            findNavController().navigate(R.id.action_navigation_space_to_create_event, bundle)
-        }
+//        val addEventFab: View = root.findViewById(R.id.fab_add_item)
+//        addEventFab.setOnClickListener {
+//            val bundle = bundleOf("spaceCode" to spaceCode)
+//            findNavController().navigate(R.id.action_navigation_space_to_create_event, bundle)
+//        }
 
         return root
     }

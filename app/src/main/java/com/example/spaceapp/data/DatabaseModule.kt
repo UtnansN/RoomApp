@@ -2,11 +2,8 @@ package com.example.spaceapp.data
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.preference.PreferenceManager
-import androidx.room.Room
-import com.example.spaceapp.AuthInterceptor
+import com.example.spaceapp.auth.AuthInterceptor
 import com.example.spaceapp.Constants
-import com.example.spaceapp.data.dao.SpaceDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

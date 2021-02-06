@@ -1,9 +1,7 @@
 package com.example.spaceapp.ui.userspaces.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -23,6 +21,25 @@ class AllSpacesFragment : Fragment() {
     private lateinit var spaceRecyclerView: RecyclerView
     private lateinit var allSpacesItemAdapter: AllSpacesItemAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.findItem(R.id.menu_add_or_join_space).isVisible = true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_add_or_join_space -> findNavController()
+                .navigate(R.id.action_navigation_my_spaces_to_space_join_or_create)
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,7 +53,7 @@ class AllSpacesFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_itemlist, container, false)
 
         allSpacesItemAdapter = AllSpacesItemAdapter(AllSpacesItemAdapter.SpaceDiff()) {
-            val action = AllSpacesFragmentDirections.actionNavigationMySpacesToSpecificSpace(it.code)
+            val action = AllSpacesFragmentDirections.actionNavigationMySpacesToSpecificSpace(it.name, it.code)
             findNavController().navigate(action)
         }
 
@@ -45,13 +62,6 @@ class AllSpacesFragment : Fragment() {
             layoutManager = LinearLayoutManager(this.context)
             adapter = allSpacesItemAdapter
         }
-
-        val addRoomFab: View = root.findViewById(R.id.fab_add_item)
-        addRoomFab.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_my_spaces_to_space_join_or_create)
-        }
-
-        requireActivity().title = "My Spaces"
 
         return root
     }

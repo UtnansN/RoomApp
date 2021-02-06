@@ -1,14 +1,15 @@
-package com.example.spaceapp
+package com.example.spaceapp.auth
 
+import com.example.spaceapp.Constants
 import com.example.spaceapp.data.CredentialCache
-import com.example.spaceapp.data.model.remote.auth.LoginResponseDTO
+import com.example.spaceapp.auth.dto.LoginResponseDTO
 import com.google.gson.Gson
 import okhttp3.*
 import javax.inject.Inject
 
 class AuthInterceptor @Inject constructor(private val credentialCache: CredentialCache): Interceptor {
 
-    private val JSON = MediaType.parse("application/json; charset=utf-8")
+    private val json = MediaType.parse("application/json; charset=utf-8")
     private val mapper = Gson()
 
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -17,7 +18,7 @@ class AuthInterceptor @Inject constructor(private val credentialCache: Credentia
         if (credentialCache.isTokenExpiredOrNull() && !isAuthRelated(original.url().encodedPath())) {
             val loginDTO = credentialCache.getLoginDTO()
 
-            val refreshBody = RequestBody.create(JSON, mapper.toJson(loginDTO))
+            val refreshBody = RequestBody.create(json, mapper.toJson(loginDTO))
             val refreshRequest = original.newBuilder()
                 .post(refreshBody)
                 .url(Constants.API_URL + Constants.DEST_LOGIN)
@@ -30,10 +31,17 @@ class AuthInterceptor @Inject constructor(private val credentialCache: Credentia
             val loginResponseDTO = mapper.fromJson(response.body()?.string(), LoginResponseDTO::class.java)
             credentialCache.setCurrentToken(loginResponseDTO.token)
         }
-        val resumedCall = original.newBuilder()
-            .addHeader("Authorization",  "Bearer " + credentialCache.getCurrentToken())
-            .build()
-        return chain.proceed(resumedCall)
+
+        return if (isAuthRelated(original.url().encodedPath())) {
+            chain.proceed(original)
+        } else {
+            val resumedCall = original.newBuilder()
+                .addHeader("Authorization",  "Bearer " + credentialCache.getCurrentToken())
+                .build()
+
+            chain.proceed(resumedCall)
+        }
+
     }
 
     private fun isAuthRelated(path: String): Boolean {

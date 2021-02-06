@@ -25,11 +25,15 @@
     <fragment
         android:id="@+id/navigation_space"
         android:name="com.example.spaceapp.ui.exactspace.fragment.SpaceFragment"
-        android:label="Space">
+        android:label="{title}">
 
+        <argument
+            android:name="title"
+            app:argType="string" />
         <argument
             android:name="spaceCode"
             app:argType="string" />
+
         <action
             android:id="@+id/action_navigation_space_to_space_info"
             app:destination="@id/navigation_space_info" />
@@ -41,19 +45,11 @@
     <fragment
         android:id="@+id/navigation_space_join_create"
         android:name="com.example.spaceapp.ui.userspaces.fragment.CreateOrJoinFragment"
-        android:label="Join Space">
-        <action
-            android:id="@+id/action_navigation_space_join_create_to_my_spaces"
-            app:destination="@id/navigation_my_spaces" />
-    </fragment>
+        android:label="Join Space"/>
     <fragment
         android:id="@+id/navigation_space_info"
         android:name="com.example.spaceapp.ui.exactspace.fragment.SpaceInfoFragment"
-        android:label="Space Information">
-        <action
-            android:id="@+id/action_navigation_space_info_to_room"
-            app:destination="@id/navigation_space" />
-    </fragment>
+        android:label="Space Information"/>
     <fragment
         android:id="@+id/navigation_create_event"
         android:name="com.example.spaceapp.ui.exactspace.fragment.CreateEventFragment"

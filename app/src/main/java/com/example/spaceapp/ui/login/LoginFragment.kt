@@ -2,42 +2,45 @@ package com.example.spaceapp.ui.login
 
 import android.app.Activity
 import android.content.Intent
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
-import android.view.inputmethod.EditorInfo
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.example.spaceapp.ui.MainActivity
-
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.spaceapp.R
 import com.example.spaceapp.data.model.remote.Resource
+import com.example.spaceapp.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity : AppCompatActivity() {
+class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_login)
-
-        val username = findViewById<EditText>(R.id.username)
-        val password = findViewById<EditText>(R.id.password)
-        val login = findViewById<Button>(R.id.login)
-        val loading = findViewById<ProgressBar>(R.id.loading)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-        loginViewModel.loginFormState.observe(this, Observer {
+        val root = inflater.inflate(R.layout.fragment_login, container, false)
+
+        val username = root.findViewById<EditText>(R.id.username)
+        val password = root.findViewById<EditText>(R.id.password)
+        val login = root.findViewById<Button>(R.id.login)
+        val loading = root.findViewById<ProgressBar>(R.id.loading)
+
+        loginViewModel.loginFormState.observe(viewLifecycleOwner, Observer {
             val loginState = it ?: return@Observer
 
             // disable login button unless both username / password is valid
@@ -51,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
-        loginViewModel.loginResult.observe(this, {
+        loginViewModel.loginResult.observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.ERROR -> {
                     loading.visibility = View.GONE
@@ -60,9 +63,9 @@ class LoginActivity : AppCompatActivity() {
                 Resource.Status.SUCCESS -> {
                     loading.visibility = View.GONE
                     loginViewModel.invokeUserSave(username.text.toString(), password.text.toString())
-                    setResult(Activity.RESULT_OK)
-                    val intent = Intent(this, MainActivity::class.java)
-                    finish()
+                    requireActivity().setResult(Activity.RESULT_OK)
+                    val intent = Intent(requireActivity(), MainActivity::class.java)
+                    requireActivity().finish()
                     startActivity(intent)
                 }
                 Resource.Status.LOADING -> {
@@ -71,39 +74,17 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
-        username.afterTextChanged {
-            loginViewModel.loginDataChanged(
-                username.text.toString()
-            )
+        login.setOnClickListener {
+            loginViewModel.login(username.text.toString(), password.text.toString())
         }
 
-        password.apply {
-            afterTextChanged {
-                loginViewModel.loginDataChanged(
-                    username.text.toString()
-                )
-            }
-
-            setOnEditorActionListener { _, actionId, _ ->
-                when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
-                        loginViewModel.login(
-                            username.text.toString(),
-                            password.text.toString()
-                        )
-                }
-                false
-            }
-
-            login.setOnClickListener {
-                loginViewModel.login(username.text.toString(), password.text.toString())
-            }
-        }
+        return root
     }
 
     private fun showLoginFailed(errorString: String) {
-        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), errorString, Toast.LENGTH_SHORT).show()
     }
+
 }
 
 /**

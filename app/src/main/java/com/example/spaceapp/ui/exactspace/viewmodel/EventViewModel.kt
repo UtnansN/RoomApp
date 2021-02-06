@@ -15,20 +15,21 @@ import javax.inject.Inject
 @HiltViewModel
 class EventViewModel @Inject constructor(private val appRepository: AppRepository): ViewModel() {
 
-    private var spaceCode = MutableLiveData<String>(null)
+    private var spaceCode: String? = null
+
     private var _allEvents: MutableLiveData<Resource<List<EventDTO>>> = MutableLiveData(Resource.loading())
     var allEvents: LiveData<Resource<List<EventDTO>>> = _allEvents
 
     fun setSpaceCode(code: String) {
-        if (spaceCode.value == null || spaceCode.value != code) {
-            spaceCode.value = code
+        if (spaceCode == null || spaceCode != code) {
+            spaceCode = code
             refreshEvents()
         }
     }
 
     private fun refreshEvents() {
-        if (spaceCode.value != null) {
-            appRepository.fetchEventsInSpace(_allEvents, spaceCode.value.toString())
+        if (spaceCode != null) {
+            appRepository.fetchEventsInSpace(_allEvents, spaceCode!!)
         }
     }
 

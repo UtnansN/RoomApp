@@ -8,7 +8,7 @@ import com.example.spaceapp.data.LoginRepository
 
 import com.example.spaceapp.R
 import com.example.spaceapp.data.model.remote.Resource
-import com.example.spaceapp.data.model.remote.auth.LoginResponseDTO
+import com.example.spaceapp.auth.dto.LoginResponseDTO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.lang.RuntimeException
 import javax.inject.Inject
@@ -24,23 +24,6 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
 
     fun login(username: String, password: String) {
         loginRepository.login(_loginResult, username, password)
-    }
-
-    fun loginDataChanged(username: String) {
-        if (!isUserNameValid(username)) {
-            _loginForm.value = LoginFormState(usernameError = R.string.invalid_username)
-        } else {
-            _loginForm.value = LoginFormState(isDataValid = true)
-        }
-    }
-
-    // A placeholder username validation check
-    private fun isUserNameValid(username: String): Boolean {
-        return if (username.contains('@')) {
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
-        } else {
-            username.isNotBlank()
-        }
     }
 
     fun invokeUserSave(userName: String, password: String) {

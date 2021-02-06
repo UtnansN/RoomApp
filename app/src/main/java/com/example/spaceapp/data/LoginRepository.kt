@@ -1,9 +1,9 @@
 package com.example.spaceapp.data
 
 import androidx.lifecycle.MutableLiveData
-import com.example.spaceapp.data.model.remote.auth.LoginDTO
+import com.example.spaceapp.auth.dto.LoginDTO
 import com.example.spaceapp.data.model.remote.Resource
-import com.example.spaceapp.data.model.remote.auth.LoginResponseDTO
+import com.example.spaceapp.auth.dto.LoginResponseDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
