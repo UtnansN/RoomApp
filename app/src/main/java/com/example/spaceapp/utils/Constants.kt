@@ -1,9 +1,9 @@
-package com.example.spaceapp
+package com.example.spaceapp.utils
 
 object Constants {
 
     // Actual machine's IP
-    const val API_URL = "http://10.0.2.2:8080"
+    const val API_URL = "http://192.168.1.108:8080"
 
     const val PREF_LOGIN = "LOGIN"
     const val PREF_USERNAME = "username"

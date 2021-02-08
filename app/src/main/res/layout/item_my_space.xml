@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
+        <variable
+            name="dateTimeConverter"
+            type="com.example.spaceapp.utils.DateTimeConverter" />
         <variable
             name="space"
             type="com.example.spaceapp.data.model.remote.UserSpacesDTO" />
@@ -12,17 +16,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/extra_close_divider_margin"
+        android:layout_marginBottom="@dimen/extra_close_divider_margin"
         android:background="@drawable/rounded_edittext"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:layout_marginBottom="10dp">
+        android:foreground="?android:attr/selectableItemBackground">
 
         <TextView
             android:id="@+id/txt_space_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/close_divider_margin"
+            android:layout_marginEnd="@dimen/close_divider_margin"
             android:maxLines="3"
             android:text="@{space.name}"
             android:textStyle="bold"
@@ -32,29 +37,26 @@
             tools:text="Title" />
 
         <TextView
-            android:id="@+id/txt_space_next_event"
+            android:id="@+id/txt_space_next_event_name"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="24dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:lines="1"
             android:maxLines="3"
             android:minLines="1"
-            android:text="Next event: Wheneverthefuck"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txt_space_code"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:text='@{space.nextEvent == null ? (@string/no_upcoming_events) : (@string/next_event(space.nextEvent.nextEventName))}'
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/frameLayout"
             app:layout_constraintTop_toBottomOf="@+id/txt_space_name"
-            app:layout_constraintVertical_bias="1.0"
             tools:text="Next event" />
 
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/circle_mask"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,23 +66,44 @@
                 android:id="@+id/img_space"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:srcCompat="@tools:sample/avatars"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                tools:srcCompat="@tools:sample/avatars" />
         </FrameLayout>
 
         <TextView
             android:id="@+id/txt_space_code"
-            android:layout_width="wrap_content"
+            android:layout_width="74dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:alpha="0.2"
+            android:lines="1"
+            android:maxLines="1"
             android:text="@{space.code}"
-            android:textSize="30sp"
+            android:textAlignment="center"
+            android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_space_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txt_space_name"
             tools:text="AAAAAA" />
+
+        <TextView
+            android:id="@+id/txt_space_next_event_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="@dimen/close_divider_margin"
+            android:lines="1"
+            android:maxLines="1"
+            android:minLines="1"
+            android:text='@{space.nextEvent != null ? dateTimeConverter.instantToLocalDateAndTimeString(space.nextEvent.nextEventDate) : ("")}'
+            android:visibility="@{space.nextEvent == null ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txt_space_next_event_name"
+            app:layout_constraintStart_toEndOf="@+id/frameLayout"
+            app:layout_constraintTop_toBottomOf="@+id/txt_space_next_event_name"
+            tools:text="Next date" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

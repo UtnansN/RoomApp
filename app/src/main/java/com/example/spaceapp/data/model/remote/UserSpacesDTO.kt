@@ -6,7 +6,9 @@ data class UserSpacesDTO(
 
     val name: String,
 
-    val nextEvent: EventBrief
+    val nextEvent: EventBrief,
+
+    val hasWriteRights: Boolean
 )
 
 data class EventBrief(

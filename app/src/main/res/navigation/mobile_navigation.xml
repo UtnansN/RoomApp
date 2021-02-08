@@ -49,7 +49,11 @@
     <fragment
         android:id="@+id/navigation_space_info"
         android:name="com.example.spaceapp.ui.exactspace.fragment.SpaceInfoFragment"
-        android:label="Space Information"/>
+        android:label="About" >
+        <argument
+            android:name="spaceCode"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_create_event"
         android:name="com.example.spaceapp.ui.exactspace.fragment.CreateEventFragment"

@@ -8,6 +8,7 @@ import com.example.spaceapp.data.AppRepository
 import com.example.spaceapp.data.model.remote.EventDTO
 import com.example.spaceapp.data.model.remote.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.time.Instant
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,15 +28,15 @@ class CreateEventViewModel @Inject constructor(private val appRepository: AppRep
                 eventId = 0,
                 name = name.get().orEmpty(),
                 description = description.get(),
-                dateTime = convertToDateTimeString(date.get().orEmpty(), time.get().orEmpty()),
+                dateTime = "",
                 location = location.get(),
         )
 
         appRepository.createEvent(_eventResource, event, spaceCode)
     }
 
-    private fun convertToDateTimeString(date: String, time: String): String {
-        return ""
+    private fun convertToDateTimeString(date: String, time: String): Instant {
+        return Instant.now()
     }
 
 }

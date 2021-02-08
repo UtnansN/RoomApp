@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.spaceapp.ui.MainActivity
 import com.example.spaceapp.ui.login.LoginActivity
+import com.example.spaceapp.utils.Constants
 
 class InitializeActivity : Activity() {
 

@@ -1,9 +1,24 @@
 package com.example.spaceapp.ui.exactspace.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.example.spaceapp.data.AppRepository
+import com.example.spaceapp.data.model.remote.Resource
+import com.example.spaceapp.data.model.remote.SpaceInfoDTO
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SpaceInfoViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class SpaceInfoViewModel @Inject constructor(private val appRepository: AppRepository) : ViewModel() {
 
+    private val _spaceInfo: MutableLiveData<Resource<SpaceInfoDTO>> = MutableLiveData()
+    val spaceInfo: LiveData<Resource<SpaceInfoDTO>> = _spaceInfo
+
+    fun getSpaceInfo(spaceCode: String) {
+        appRepository.enqueueApiCallAndUpdateData(_spaceInfo) {
+            it.getSpaceInfo(spaceCode)
+        }
+    }
 
 }

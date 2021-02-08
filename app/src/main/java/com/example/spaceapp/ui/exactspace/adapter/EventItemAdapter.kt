@@ -8,18 +8,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceapp.BR
+import com.example.spaceapp.utils.DateTimeConverter
 import com.example.spaceapp.R
 import com.example.spaceapp.data.model.remote.EventDTO
 import com.example.spaceapp.databinding.ItemEventBinding
 
 class EventItemAdapter(
-    @NonNull diffCallback: DiffUtil.ItemCallback<EventDTO>
+    @NonNull diffCallback: DiffUtil.ItemCallback<EventDTO>,
+    private val dateTimeConverter: DateTimeConverter
 ) : ListAdapter<EventDTO, EventItemAdapter.ViewHolder>(diffCallback) {
 
-    class ViewHolder(private val binding: ItemEventBinding) :
+    class ViewHolder(private val binding: ItemEventBinding, private val dateTimeConverter: DateTimeConverter) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(event: EventDTO) {
             binding.setVariable(BR.event, event)
+            binding.setVariable(BR.dateTimeConverter, dateTimeConverter)
             binding.executePendingBindings()
         }
     }
@@ -40,7 +43,7 @@ class EventItemAdapter(
         val binding: ItemEventBinding =
             DataBindingUtil.inflate(inflater, R.layout.item_event, parent, false)
 
-        return ViewHolder(binding)
+        return ViewHolder(binding, dateTimeConverter)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

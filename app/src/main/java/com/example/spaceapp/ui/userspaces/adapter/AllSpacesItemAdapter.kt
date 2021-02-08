@@ -11,15 +11,18 @@ import com.example.spaceapp.BR
 import com.example.spaceapp.R
 import com.example.spaceapp.data.model.remote.UserSpacesDTO
 import com.example.spaceapp.databinding.ItemMySpaceBinding
+import com.example.spaceapp.utils.DateTimeConverter
 
 class AllSpacesItemAdapter(
     @NonNull diffCallback: DiffUtil.ItemCallback<UserSpacesDTO>,
+    private val dateTimeConverter: DateTimeConverter,
     private val clickListener: (UserSpacesDTO) -> Unit
 ) : ListAdapter<UserSpacesDTO, AllSpacesItemAdapter.ViewHolder>(diffCallback) {
 
-    class ViewHolder(private val binding: ItemMySpaceBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemMySpaceBinding, private val dateTimeConverter: DateTimeConverter) : RecyclerView.ViewHolder(binding.root) {
         fun bind(space: UserSpacesDTO) {
             binding.setVariable(BR.space, space)
+            binding.setVariable(BR.dateTimeConverter, dateTimeConverter)
             binding.executePendingBindings()
         }
     }
@@ -40,7 +43,7 @@ class AllSpacesItemAdapter(
         val binding: ItemMySpaceBinding =
             DataBindingUtil.inflate(inflater, R.layout.item_my_space, parent, false)
 
-        return ViewHolder(binding)
+        return ViewHolder(binding, dateTimeConverter)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

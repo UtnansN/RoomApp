@@ -1,6 +1,6 @@
 package com.example.spaceapp.data
 
-import com.example.spaceapp.Constants
+import com.example.spaceapp.utils.Constants
 import com.example.spaceapp.data.model.local.Space
 import com.example.spaceapp.data.model.remote.EventDTO
 import com.example.spaceapp.auth.dto.LoginDTO
@@ -8,6 +8,7 @@ import com.example.spaceapp.auth.dto.RegisterDTO
 import com.example.spaceapp.data.model.remote.UserSpacesDTO
 import com.example.spaceapp.auth.dto.LoginResponseDTO
 import com.example.spaceapp.auth.dto.RegisterResponseDTO
+import com.example.spaceapp.data.model.remote.SpaceInfoDTO
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -20,7 +21,7 @@ interface WebService {
     fun getSpaces(): Call<List<UserSpacesDTO>>
 
     @GET("/api/spaces/{code}")
-    fun getSpace(@Path("code") code: String): Call<Space>
+    fun getSpaceInfo(@Path("code") code: String): Call<SpaceInfoDTO>
 
     @POST("/api/spaces")
     fun createSpace(@Body space: Space): Call<Space>

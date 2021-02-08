@@ -37,7 +37,7 @@ class SpaceFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_info -> findNavController()
-                .navigate(SpaceFragmentDirections.actionNavigationSpaceToSpaceInfo())
+                .navigate(SpaceFragmentDirections.actionNavigationSpaceToSpaceInfo(spaceCode))
             else -> return super.onOptionsItemSelected(item)
         }
         return true

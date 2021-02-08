@@ -4,4 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fragment_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="close_divider_margin">4dp</dimen>
+    <dimen name="extra_close_divider_margin">2dp</dimen>
 </resources>

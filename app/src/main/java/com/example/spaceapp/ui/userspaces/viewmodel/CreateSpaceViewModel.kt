@@ -22,6 +22,8 @@ class CreateSpaceViewModel @Inject constructor(
     val createSpaceStatus: LiveData<Resource<Space>> = _createSpaceStatus
 
     fun addRoom(space: Space) {
-        appRepository.createSpace(_createSpaceStatus, space)
+        appRepository.enqueueApiCallAndUpdateData(_createSpaceStatus) {
+            it.createSpace(space)
+        }
     }
 }

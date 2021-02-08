@@ -3,7 +3,7 @@ package com.example.spaceapp.data
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.spaceapp.auth.AuthInterceptor
-import com.example.spaceapp.Constants
+import com.example.spaceapp.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,14 +41,6 @@ class DatabaseModule {
             .client(httpClient)
             .build()
     }
-
-//    @Provides
-//    @Singleton
-//    fun provideLocalDatabase(@ApplicationContext context: Context): LocalDatabase {
-//        return Room.databaseBuilder(context.applicationContext, LocalDatabase::class.java, "spaces.db")
-//            .allowMainThreadQueries()
-//            .build()
-//    }
 
     @Provides
     @LoginPreferences

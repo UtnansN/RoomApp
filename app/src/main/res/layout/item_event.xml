@@ -7,6 +7,9 @@
         <import type="android.view.View"/>
         <import type="android.text.TextUtils"/>
         <variable
+            name="dateTimeConverter"
+            type="com.example.spaceapp.utils.DateTimeConverter" />
+        <variable
             name="event"
             type="com.example.spaceapp.data.model.remote.EventDTO" />
     </data>
@@ -83,7 +86,7 @@
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:minLines="1"
-                            android:text="@{event.dateTime}"
+                            android:text="@{dateTimeConverter.instantToLocalDateAndTimeString(event.dateTime)}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/imageView2"

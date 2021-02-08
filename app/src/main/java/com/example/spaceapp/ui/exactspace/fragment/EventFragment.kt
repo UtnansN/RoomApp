@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.spaceapp.utils.DateTimeConverter
 import com.example.spaceapp.R
 import com.example.spaceapp.data.model.remote.Resource
 import com.example.spaceapp.ui.exactspace.adapter.EventItemAdapter
 import com.example.spaceapp.ui.exactspace.viewmodel.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class EventFragment : Fragment() {
@@ -26,6 +26,8 @@ class EventFragment : Fragment() {
 
     private lateinit var spaceCode: String
 
+    @Inject
+    lateinit var dateTimeConverter: DateTimeConverter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +42,7 @@ class EventFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_itemlist, container, false)
 
-        eventItemAdapter = EventItemAdapter(EventItemAdapter.EventDiff())
+        eventItemAdapter = EventItemAdapter(EventItemAdapter.EventDiff(), dateTimeConverter)
 
         eventRecyclerView = root.findViewById(R.id.rec_items)
         eventRecyclerView.apply {

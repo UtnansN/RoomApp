@@ -1,6 +1,6 @@
 package com.example.spaceapp.auth
 
-import com.example.spaceapp.Constants
+import com.example.spaceapp.utils.Constants
 import com.example.spaceapp.data.CredentialCache
 import com.example.spaceapp.auth.dto.LoginResponseDTO
 import com.google.gson.Gson

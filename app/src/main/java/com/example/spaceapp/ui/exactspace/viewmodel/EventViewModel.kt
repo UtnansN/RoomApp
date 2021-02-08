@@ -29,7 +29,9 @@ class EventViewModel @Inject constructor(private val appRepository: AppRepositor
 
     private fun refreshEvents() {
         if (spaceCode != null) {
-            appRepository.fetchEventsInSpace(_allEvents, spaceCode!!)
+            appRepository.enqueueApiCallAndUpdateData(_allEvents) {
+                it.getEventsInSpace(spaceCode!!)
+            }
         }
     }
 

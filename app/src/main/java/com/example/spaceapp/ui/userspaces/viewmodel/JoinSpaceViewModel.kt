@@ -15,7 +15,9 @@ class JoinSpaceViewModel @Inject constructor(private val repository: AppReposito
     val joinSpaceResponse: LiveData<Resource<Void>> = _joinSpaceResponse
 
     fun joinSpace(code: String) {
-        repository.joinSpace(_joinSpaceResponse, code)
+        repository.enqueueApiCallAndUpdateData(_joinSpaceResponse) {
+            it.joinSpace(code)
+        }
     }
 
 }

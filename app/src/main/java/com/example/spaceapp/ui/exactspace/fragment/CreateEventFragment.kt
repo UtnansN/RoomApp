@@ -12,16 +12,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.spaceapp.utils.DateTimeConverter
 import com.example.spaceapp.R
 import com.example.spaceapp.databinding.FragmentEventCreateBinding
 import com.example.spaceapp.ui.exactspace.viewmodel.CreateEventViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.DateFormat
 import java.util.*
+import javax.inject.Inject
 import android.text.format.DateFormat as ContextualDateFormat
 
 @AndroidEntryPoint
-class CreateEventFragment : Fragment() {
+class CreateEventFragment @Inject constructor(private val dateTimeConverter: DateTimeConverter): Fragment() {
 
     private lateinit var viewModel: CreateEventViewModel
 
@@ -49,11 +50,8 @@ class CreateEventFragment : Fragment() {
 
             val timePicker = TimePickerDialog(requireContext(), {
                     _, selectedHour, selectedMinute ->
-                val format = ContextualDateFormat.getTimeFormat(requireContext())
 
-                calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
-                calendar.set(Calendar.MINUTE, selectedMinute)
-                txtTime.setText( format.format(calendar.time) )},
+                txtTime.setText( dateTimeConverter.createTime(selectedHour, selectedMinute) )},
                 hour, minute, ContextualDateFormat.is24HourFormat(activity))
             timePicker.show()
         }
@@ -67,9 +65,8 @@ class CreateEventFragment : Fragment() {
             val datePicker = DatePickerDialog(requireContext(), {
                     _, selectedYear, selectedMonth, selectedDay ->
                 // Date displayed is always in English. Time format depends on system settings.
-                val format = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.ENGLISH)
-                calendar.set(selectedYear, selectedMonth, selectedDay)
-                txtDate.setText(format.format(calendar.time))}, year, month, day)
+
+                txtDate.setText(dateTimeConverter.createDate(selectedYear, selectedMonth, selectedDay))}, year, month, day)
 
             datePicker.datePicker.minDate = calendar.timeInMillis
             datePicker.show()

@@ -15,31 +15,6 @@ class AppRepository @Inject constructor(
     private val credentialCache: CredentialCache
 ) {
 
-    fun createSpace(holder: MutableLiveData<Resource<Space>>, space: Space) {
-        val call = webService.createSpace(space)
-        call.enqueue(genericDataUpdaterCallback(holder))
-    }
-
-    fun fetchUserSpaces(holder: MutableLiveData<Resource<List<UserSpacesDTO>>>) {
-        val call = webService.getSpaces()
-        call.enqueue(genericDataUpdaterCallback(holder))
-    }
-
-    fun fetchSpace(holder: MutableLiveData<Resource<Space>>, code: String) {
-        val call = webService.getSpace(code)
-        call.enqueue(genericDataUpdaterCallback(holder))
-    }
-
-    fun joinSpace(holder: MutableLiveData<Resource<Void>>, code: String) {
-        val call = webService.joinSpace(code)
-        call.enqueue(genericDataUpdaterCallback(holder))
-    }
-
-    fun fetchEventsInSpace(holder: MutableLiveData<Resource<List<EventDTO>>>, code: String) {
-        val call = webService.getEventsInSpace(code)
-        call.enqueue(genericDataUpdaterCallback(holder))
-    }
-
     fun createEvent(holder: MutableLiveData<Resource<EventDTO>>, event: EventDTO, spaceCode: String) {
         val call = webService.createEvent(event, spaceCode)
         call.enqueue(genericDataUpdaterCallback(holder))

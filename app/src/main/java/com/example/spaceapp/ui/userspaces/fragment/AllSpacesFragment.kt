@@ -12,7 +12,9 @@ import com.example.spaceapp.R
 import com.example.spaceapp.data.model.remote.Resource
 import com.example.spaceapp.ui.userspaces.adapter.AllSpacesItemAdapter
 import com.example.spaceapp.ui.userspaces.viewmodel.AllSpacesViewModel
+import com.example.spaceapp.utils.DateTimeConverter
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AllSpacesFragment : Fragment() {
@@ -20,6 +22,9 @@ class AllSpacesFragment : Fragment() {
     private lateinit var viewModel: AllSpacesViewModel
     private lateinit var spaceRecyclerView: RecyclerView
     private lateinit var allSpacesItemAdapter: AllSpacesItemAdapter
+
+    @Inject
+    lateinit var dateTimeConverter: DateTimeConverter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +57,7 @@ class AllSpacesFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_itemlist, container, false)
 
-        allSpacesItemAdapter = AllSpacesItemAdapter(AllSpacesItemAdapter.SpaceDiff()) {
+        allSpacesItemAdapter = AllSpacesItemAdapter(AllSpacesItemAdapter.SpaceDiff(), dateTimeConverter) {
             val action = AllSpacesFragmentDirections.actionNavigationMySpacesToSpecificSpace(it.name, it.code)
             findNavController().navigate(action)
         }

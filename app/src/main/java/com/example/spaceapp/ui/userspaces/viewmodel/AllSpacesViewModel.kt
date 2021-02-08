@@ -18,9 +18,9 @@ class AllSpacesViewModel @Inject constructor(private val repository: AppReposito
     private val _allSpaces: MutableLiveData<Resource<List<UserSpacesDTO>>> = MutableLiveData()
     var allSpaces: LiveData<Resource<List<UserSpacesDTO>>> = _allSpaces
 
-
     fun invokeSpaceUpdate() {
-        repository.fetchUserSpaces(_allSpaces)
+        repository.enqueueApiCallAndUpdateData(_allSpaces) {
+            it.getSpaces()
+        }
     }
-
 }

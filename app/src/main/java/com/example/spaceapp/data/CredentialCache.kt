@@ -2,7 +2,7 @@ package com.example.spaceapp.data
 
 import android.content.SharedPreferences
 import com.auth0.android.jwt.JWT
-import com.example.spaceapp.Constants
+import com.example.spaceapp.utils.Constants
 import com.example.spaceapp.auth.dto.LoginDTO
 import javax.inject.Inject
 
