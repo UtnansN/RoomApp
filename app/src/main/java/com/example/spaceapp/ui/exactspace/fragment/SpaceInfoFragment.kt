@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.spaceapp.R
-import com.example.spaceapp.data.model.remote.Resource
+import com.example.spaceapp.data.model.dto.Resource
 import com.example.spaceapp.databinding.FragmentSpaceAboutBinding
 import com.example.spaceapp.ui.exactspace.viewmodel.SpaceInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint

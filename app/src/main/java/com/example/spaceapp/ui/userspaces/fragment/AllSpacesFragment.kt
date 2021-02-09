@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceapp.R
-import com.example.spaceapp.data.model.remote.Resource
+import com.example.spaceapp.data.model.dto.Resource
 import com.example.spaceapp.ui.userspaces.adapter.AllSpacesItemAdapter
 import com.example.spaceapp.ui.userspaces.viewmodel.AllSpacesViewModel
 import com.example.spaceapp.utils.DateTimeConverter

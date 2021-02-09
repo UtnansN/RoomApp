@@ -3,11 +3,9 @@ package com.example.spaceapp.ui.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import android.util.Patterns
 import com.example.spaceapp.data.LoginRepository
 
-import com.example.spaceapp.R
-import com.example.spaceapp.data.model.remote.Resource
+import com.example.spaceapp.data.model.dto.Resource
 import com.example.spaceapp.auth.dto.LoginResponseDTO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.lang.RuntimeException

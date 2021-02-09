@@ -11,7 +11,7 @@
             type="com.example.spaceapp.utils.DateTimeConverter" />
         <variable
             name="event"
-            type="com.example.spaceapp.data.model.remote.EventDTO" />
+            type="com.example.spaceapp.data.model.dto.EventDTO" />
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout

@@ -2,13 +2,11 @@ package com.example.spaceapp.ui.exactspace.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.spaceapp.data.AppRepository
-import com.example.spaceapp.data.LocalDatabase
-import com.example.spaceapp.data.model.local.Event
-import com.example.spaceapp.data.model.remote.EventDTO
-import com.example.spaceapp.data.model.remote.Resource
+import com.example.spaceapp.data.model.dto.EventDTO
+import com.example.spaceapp.data.model.dto.EventPackageDTO
+import com.example.spaceapp.data.model.dto.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -17,8 +15,8 @@ class EventViewModel @Inject constructor(private val appRepository: AppRepositor
 
     private var spaceCode: String? = null
 
-    private var _allEvents: MutableLiveData<Resource<List<EventDTO>>> = MutableLiveData(Resource.loading())
-    var allEvents: LiveData<Resource<List<EventDTO>>> = _allEvents
+    private var _allEvents: MutableLiveData<Resource<EventPackageDTO>> = MutableLiveData(Resource.loading())
+    var allEvents: LiveData<Resource<EventPackageDTO>> = _allEvents
 
     fun setSpaceCode(code: String) {
         if (spaceCode == null || spaceCode != code) {

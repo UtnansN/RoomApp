@@ -2,13 +2,14 @@ package com.example.spaceapp.data
 
 import com.example.spaceapp.utils.Constants
 import com.example.spaceapp.data.model.local.Space
-import com.example.spaceapp.data.model.remote.EventDTO
+import com.example.spaceapp.data.model.dto.EventDTO
 import com.example.spaceapp.auth.dto.LoginDTO
 import com.example.spaceapp.auth.dto.RegisterDTO
-import com.example.spaceapp.data.model.remote.UserSpacesDTO
+import com.example.spaceapp.data.model.dto.UserSpacesDTO
 import com.example.spaceapp.auth.dto.LoginResponseDTO
 import com.example.spaceapp.auth.dto.RegisterResponseDTO
-import com.example.spaceapp.data.model.remote.SpaceInfoDTO
+import com.example.spaceapp.data.model.dto.EventPackageDTO
+import com.example.spaceapp.data.model.dto.SpaceInfoDTO
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -30,7 +31,7 @@ interface WebService {
     fun joinSpace(@Path("spaceCode") spaceCode: String): Call<Void>
 
     @GET("/api/spaces/{spaceCode}/events")
-    fun getEventsInSpace(@Path("spaceCode") spaceCode: String): Call<List<EventDTO>>
+    fun getEventsInSpace(@Path("spaceCode") spaceCode: String): Call<EventPackageDTO>
 
     @POST("/api/spaces/{spaceCode}/events")
     fun createEvent(@Body event: EventDTO, @Path("spaceCode") spaceCode: String): Call<EventDTO>

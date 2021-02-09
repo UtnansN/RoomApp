@@ -22,7 +22,10 @@ import javax.inject.Inject
 import android.text.format.DateFormat as ContextualDateFormat
 
 @AndroidEntryPoint
-class CreateEventFragment @Inject constructor(private val dateTimeConverter: DateTimeConverter): Fragment() {
+class CreateEventFragment : Fragment() {
+
+    @Inject
+    lateinit var dateTimeConverter: DateTimeConverter
 
     private lateinit var viewModel: CreateEventViewModel
 
@@ -50,6 +53,8 @@ class CreateEventFragment @Inject constructor(private val dateTimeConverter: Dat
 
             val timePicker = TimePickerDialog(requireContext(), {
                     _, selectedHour, selectedMinute ->
+                viewModel.chosenDate[Calendar.HOUR_OF_DAY] = selectedHour
+                viewModel.chosenDate[Calendar.MINUTE] = selectedMinute
 
                 txtTime.setText( dateTimeConverter.createTime(selectedHour, selectedMinute) )},
                 hour, minute, ContextualDateFormat.is24HourFormat(activity))
@@ -64,10 +69,9 @@ class CreateEventFragment @Inject constructor(private val dateTimeConverter: Dat
 
             val datePicker = DatePickerDialog(requireContext(), {
                     _, selectedYear, selectedMonth, selectedDay ->
+                viewModel.chosenDate.set(selectedYear, selectedMonth, selectedDay)
                 // Date displayed is always in English. Time format depends on system settings.
-
                 txtDate.setText(dateTimeConverter.createDate(selectedYear, selectedMonth, selectedDay))}, year, month, day)
-
             datePicker.datePicker.minDate = calendar.timeInMillis
             datePicker.show()
         }

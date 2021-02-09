@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceapp.BR
 import com.example.spaceapp.R
-import com.example.spaceapp.data.model.remote.UserSpacesDTO
+import com.example.spaceapp.data.model.dto.UserSpacesDTO
 import com.example.spaceapp.databinding.ItemMySpaceBinding
 import com.example.spaceapp.utils.DateTimeConverter
 

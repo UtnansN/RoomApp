@@ -1,8 +1,4 @@
-package com.example.spaceapp.data.model.remote
-
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import java.time.Instant
+package com.example.spaceapp.data.model.dto
 
 data class EventDTO (
     val eventId: Int = 0,

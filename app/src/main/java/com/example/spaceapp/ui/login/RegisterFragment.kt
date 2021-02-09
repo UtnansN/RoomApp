@@ -20,16 +20,14 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
 
         val binding: FragmentRegisterBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
         binding.viewModel = registerViewModel
 
-        val root = binding.root
-
-        return root
+        return binding.root
     }
     
 }

@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.spaceapp.R
-import com.example.spaceapp.data.model.remote.Resource
+import com.example.spaceapp.data.model.dto.Resource
 import com.example.spaceapp.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,10 +1,8 @@
 package com.example.spaceapp.data
 
 import androidx.lifecycle.MutableLiveData
-import com.example.spaceapp.data.model.local.Space
-import com.example.spaceapp.data.model.remote.EventDTO
-import com.example.spaceapp.data.model.remote.Resource
-import com.example.spaceapp.data.model.remote.UserSpacesDTO
+import com.example.spaceapp.data.model.dto.EventDTO
+import com.example.spaceapp.data.model.dto.Resource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

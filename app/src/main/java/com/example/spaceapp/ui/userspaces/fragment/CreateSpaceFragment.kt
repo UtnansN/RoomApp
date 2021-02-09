@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.spaceapp.R
 import com.example.spaceapp.data.model.local.Space
-import com.example.spaceapp.data.model.remote.Resource
+import com.example.spaceapp.data.model.dto.Resource
 import com.example.spaceapp.ui.userspaces.viewmodel.CreateSpaceViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

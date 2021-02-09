@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceapp.BR
 import com.example.spaceapp.utils.DateTimeConverter
 import com.example.spaceapp.R
-import com.example.spaceapp.data.model.remote.EventDTO
+import com.example.spaceapp.data.model.dto.EventDTO
 import com.example.spaceapp.databinding.ItemEventBinding
 
 class EventItemAdapter(

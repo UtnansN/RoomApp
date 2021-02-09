@@ -1,4 +1,4 @@
-package com.example.spaceapp.data.model.remote
+package com.example.spaceapp.data.model.dto
 
 
 // A neat little resource class to encapsulate received responses.

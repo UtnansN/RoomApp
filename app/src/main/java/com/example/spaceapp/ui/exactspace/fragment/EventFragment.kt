@@ -2,17 +2,21 @@ package com.example.spaceapp.ui.exactspace.fragment
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceapp.utils.DateTimeConverter
 import com.example.spaceapp.R
-import com.example.spaceapp.data.model.remote.Resource
+import com.example.spaceapp.data.model.dto.Resource
 import com.example.spaceapp.ui.exactspace.adapter.EventItemAdapter
 import com.example.spaceapp.ui.exactspace.viewmodel.EventViewModel
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,6 +27,7 @@ class EventFragment : Fragment() {
     private lateinit var eventRecyclerView: RecyclerView
     private lateinit var eventItemAdapter: EventItemAdapter
     private lateinit var emptyView: LinearLayout
+    private lateinit var addEventFab: FloatingActionButton
 
     private lateinit var spaceCode: String
 
@@ -52,11 +57,11 @@ class EventFragment : Fragment() {
 
         emptyView = root.findViewById(R.id.rec_emptyview)
 
-//        val addEventFab: View = root.findViewById(R.id.fab_add_item)
-//        addEventFab.setOnClickListener {
-//            val bundle = bundleOf("spaceCode" to spaceCode)
-//            findNavController().navigate(R.id.action_navigation_space_to_create_event, bundle)
-//        }
+        addEventFab = root.findViewById(R.id.fab_add_item)
+        addEventFab.setOnClickListener {
+            val bundle = bundleOf("spaceCode" to spaceCode)
+            findNavController().navigate(R.id.action_navigation_space_to_create_event, bundle)
+        }
 
         return root
     }
@@ -67,12 +72,17 @@ class EventFragment : Fragment() {
         eventViewModel.allEvents.observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
-                    if (it.data != null && it.data.isNotEmpty()) {
-                        emptyView.visibility = View.GONE
-                        it.data.let { events -> eventItemAdapter.submitList(events) }
-                    }
-                    else {
-                        emptyView.visibility = View.VISIBLE
+                    if (it.data != null) {
+                        if (it.data.events.isNotEmpty()) {
+                            emptyView.visibility = View.GONE
+                            it.data.let { eventPackage -> eventItemAdapter.submitList(eventPackage.events) }
+                        } else {
+                            emptyView.visibility = View.VISIBLE
+                        }
+
+                        if (it.data.hasEventCreateRights) {
+                            addEventFab.visibility = View.VISIBLE
+                        }
                     }
                 }
                 Resource.Status.ERROR -> Toast.makeText(activity, it.message, Toast.LENGTH_SHORT)
