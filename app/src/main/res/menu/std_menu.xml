@@ -20,6 +20,13 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/menu_leave_space"
+        android:title="Leave space"
+        android:icon="@drawable/ic_baseline_exit_24"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/menu_info"
         android:title="Information"
         android:icon="@drawable/ic_baseline_info_24"

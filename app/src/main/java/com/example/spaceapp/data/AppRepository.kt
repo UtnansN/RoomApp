@@ -1,8 +1,8 @@
 package com.example.spaceapp.data
 
 import androidx.lifecycle.MutableLiveData
-import com.example.spaceapp.data.model.dto.EventDTO
-import com.example.spaceapp.data.model.dto.Resource
+import com.example.spaceapp.data.model.EventBriefDTO
+import com.example.spaceapp.data.model.Resource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -13,8 +13,8 @@ class AppRepository @Inject constructor(
     private val credentialCache: CredentialCache
 ) {
 
-    fun createEvent(holder: MutableLiveData<Resource<EventDTO>>, event: EventDTO, spaceCode: String) {
-        val call = webService.createEvent(event, spaceCode)
+    fun createEvent(holder: MutableLiveData<Resource<EventBriefDTO>>, eventBrief: EventBriefDTO, spaceCode: String) {
+        val call = webService.createEvent(eventBrief, spaceCode)
         call.enqueue(genericDataUpdaterCallback(holder))
     }
 
@@ -41,6 +41,10 @@ class AppRepository @Inject constructor(
                 holder.value = Resource.error(t.message.orEmpty())
             }
         }
+    }
+
+    fun setLoggedInUser(userName: String, password: String, token: String) {
+        credentialCache.setLoggedInUser(userName, password, token)
     }
 
 }

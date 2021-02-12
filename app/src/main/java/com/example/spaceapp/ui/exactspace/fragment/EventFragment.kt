@@ -2,7 +2,6 @@ package com.example.spaceapp.ui.exactspace.fragment
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceapp.utils.DateTimeConverter
 import com.example.spaceapp.R
-import com.example.spaceapp.data.model.dto.Resource
+import com.example.spaceapp.data.model.Resource
 import com.example.spaceapp.ui.exactspace.adapter.EventItemAdapter
 import com.example.spaceapp.ui.exactspace.viewmodel.EventViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -50,24 +49,24 @@ class EventFragment : Fragment() {
         eventItemAdapter = EventItemAdapter(EventItemAdapter.EventDiff(), dateTimeConverter)
 
         eventRecyclerView = root.findViewById(R.id.rec_items)
+        emptyView = root.findViewById(R.id.rec_emptyview)
+        addEventFab = root.findViewById(R.id.fab_add_item)
+
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         eventRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
             adapter = eventItemAdapter
         }
 
-        emptyView = root.findViewById(R.id.rec_emptyview)
-
-        addEventFab = root.findViewById(R.id.fab_add_item)
         addEventFab.setOnClickListener {
             val bundle = bundleOf("spaceCode" to spaceCode)
             findNavController().navigate(R.id.action_navigation_space_to_create_event, bundle)
         }
-
-        return root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
         eventViewModel.allEvents.observe(viewLifecycleOwner, {
             when (it.status) {
@@ -90,7 +89,6 @@ class EventFragment : Fragment() {
                 Resource.Status.LOADING -> {
                 }
             }
-
         })
     }
 

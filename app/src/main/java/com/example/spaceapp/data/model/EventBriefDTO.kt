@@ -1,6 +1,6 @@
-package com.example.spaceapp.data.model.dto
+package com.example.spaceapp.data.model
 
-data class EventDTO (
+data class EventBriefDTO (
     val eventId: Int = 0,
     val name: String = "",
     val description: String? = "",

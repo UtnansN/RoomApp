@@ -68,6 +68,7 @@ class SpaceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewPager.adapter =
             SpaceViewPagerAdapter(this, spaceCode)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

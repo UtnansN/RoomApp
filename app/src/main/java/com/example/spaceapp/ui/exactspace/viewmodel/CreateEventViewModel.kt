@@ -5,10 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.spaceapp.data.AppRepository
-import com.example.spaceapp.data.model.dto.EventDTO
-import com.example.spaceapp.data.model.dto.Resource
+import com.example.spaceapp.data.model.EventBriefDTO
+import com.example.spaceapp.data.model.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.time.Instant
 import java.util.*
 import javax.inject.Inject
 
@@ -23,11 +22,11 @@ class CreateEventViewModel @Inject constructor(private val appRepository: AppRep
 
     val chosenDate: Calendar = Calendar.getInstance()
 
-    private val _eventResource: MutableLiveData<Resource<EventDTO>> = MutableLiveData()
-    val eventResource: LiveData<Resource<EventDTO>> = _eventResource
+    private val _eventBriefResource: MutableLiveData<Resource<EventBriefDTO>> = MutableLiveData()
+    val eventBriefResource: LiveData<Resource<EventBriefDTO>> = _eventBriefResource
 
     fun submitData(spaceCode: String) {
-        val event = EventDTO(
+        val event = EventBriefDTO(
                 eventId = 0,
                 name = name.get().orEmpty(),
                 description = description.get(),
@@ -35,6 +34,6 @@ class CreateEventViewModel @Inject constructor(private val appRepository: AppRep
                 location = location.get(),
         )
 
-        appRepository.createEvent(_eventResource, event, spaceCode)
+        appRepository.createEvent(_eventBriefResource, event, spaceCode)
     }
 }

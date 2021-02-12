@@ -9,30 +9,30 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceapp.BR
 import com.example.spaceapp.R
-import com.example.spaceapp.data.model.dto.UserSpacesDTO
+import com.example.spaceapp.data.model.ShortSpaceDTO
 import com.example.spaceapp.databinding.ItemMySpaceBinding
 import com.example.spaceapp.utils.DateTimeConverter
 
 class AllSpacesItemAdapter(
-    @NonNull diffCallback: DiffUtil.ItemCallback<UserSpacesDTO>,
+    @NonNull diffCallback: DiffUtil.ItemCallback<ShortSpaceDTO>,
     private val dateTimeConverter: DateTimeConverter,
-    private val clickListener: (UserSpacesDTO) -> Unit
-) : ListAdapter<UserSpacesDTO, AllSpacesItemAdapter.ViewHolder>(diffCallback) {
+    private val clickListener: (ShortSpaceDTO) -> Unit
+) : ListAdapter<ShortSpaceDTO, AllSpacesItemAdapter.ViewHolder>(diffCallback) {
 
     class ViewHolder(private val binding: ItemMySpaceBinding, private val dateTimeConverter: DateTimeConverter) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(space: UserSpacesDTO) {
+        fun bind(space: ShortSpaceDTO) {
             binding.setVariable(BR.space, space)
             binding.setVariable(BR.dateTimeConverter, dateTimeConverter)
             binding.executePendingBindings()
         }
     }
 
-    class SpaceDiff : DiffUtil.ItemCallback<UserSpacesDTO>() {
-        override fun areItemsTheSame(oldItem: UserSpacesDTO, newItem: UserSpacesDTO): Boolean {
+    class SpaceDiff : DiffUtil.ItemCallback<ShortSpaceDTO>() {
+        override fun areItemsTheSame(oldItem: ShortSpaceDTO, newItem: ShortSpaceDTO): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: UserSpacesDTO, newItem: UserSpacesDTO): Boolean {
+        override fun areContentsTheSame(oldItem: ShortSpaceDTO, newItem: ShortSpaceDTO): Boolean {
             return oldItem.code == newItem.code
         }
     }
@@ -47,7 +47,7 @@ class AllSpacesItemAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val space: UserSpacesDTO = getItem(position)
+        val space: ShortSpaceDTO = getItem(position)
 
         holder.bind(space)
         holder.itemView.setOnClickListener {

@@ -28,23 +28,33 @@ class CreateEventFragment : Fragment() {
     lateinit var dateTimeConverter: DateTimeConverter
 
     private lateinit var viewModel: CreateEventViewModel
+    private lateinit var spaceCode: String
+    private lateinit var txtTime: EditText
+    private lateinit var txtDate: EditText
+    private lateinit var btnSubmit: Button
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         viewModel = ViewModelProvider(this).get(CreateEventViewModel::class.java)
 
-        val binding: FragmentEventCreateBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_event_create, container, false)
+        val binding = FragmentEventCreateBinding.inflate(inflater, container, false)
 
         val root = binding.root
-        val spaceCode = requireArguments().getString("spaceCode").orEmpty()
+        spaceCode = requireArguments().getString("spaceCode").orEmpty()
 
         binding.lifecycleOwner = this
         binding.viewmodel = viewModel
         binding.spaceCode = spaceCode
 
-        val txtTime: EditText = root.findViewById(R.id.txt_event_create_time)
-        val txtDate: EditText = root.findViewById(R.id.txt_event_create_date)
+        txtTime = root.findViewById(R.id.txt_event_create_time)
+        txtDate = root.findViewById(R.id.txt_event_create_date)
+        btnSubmit = root.findViewById(R.id.btn_create_event)
+
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         txtTime.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -76,13 +86,10 @@ class CreateEventFragment : Fragment() {
             datePicker.show()
         }
 
-        val btnSubmit: Button = root.findViewById(R.id.btn_create_event)
         btnSubmit.setOnClickListener {
             viewModel.submitData(spaceCode)
             findNavController().popBackStack()
         }
-
-        return root
     }
 
 }

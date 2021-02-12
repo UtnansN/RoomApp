@@ -10,6 +10,8 @@ import com.example.spaceapp.R
 import com.example.spaceapp.ui.userspaces.adapter.CreateOrJoinViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.transition.MaterialSharedAxis
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,6 +19,12 @@ class CreateOrJoinFragment : Fragment() {
 
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

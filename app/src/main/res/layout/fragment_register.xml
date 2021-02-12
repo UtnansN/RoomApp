@@ -26,11 +26,24 @@
             app:layout_constraintVertical_bias="0.4">
 
             <EditText
+                android:id="@+id/txt_register_firstname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/first_name"
+                android:text="@={viewModel.registerDTO.firstName}"
+                android:inputType="textPersonName|textCapWords"
+                app:layout_constraintEnd_toStartOf="@+id/txt_register_lastname"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
                 android:id="@+id/txt_register_lastname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:hint="Last name"
+                android:hint="@string/last_name"
+                android:text="@={viewModel.registerDTO.lastName}"
+                android:inputType="textPersonName|textCapWords"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/txt_register_firstname"
                 app:layout_constraintTop_toTopOf="@+id/txt_register_firstname" />
@@ -40,7 +53,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Email"
+                android:hint="@string/email"
+                android:text="@={viewModel.registerDTO.email}"
+                android:inputType="textEmailAddress"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_register_firstname" />
@@ -50,19 +65,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="@string/prompt_password"
+                android:hint="@string/password"
+                android:text="@={viewModel.registerDTO.password}"
+                android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_register_email" />
-
-            <EditText
-                android:id="@+id/txt_register_firstname"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="First name"
-                app:layout_constraintEnd_toStartOf="@+id/txt_register_lastname"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,4 +1,4 @@
-package com.example.spaceapp.data.model.dto
+package com.example.spaceapp.data.model
 
 
 // A neat little resource class to encapsulate received responses.

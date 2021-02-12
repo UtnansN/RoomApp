@@ -1,8 +1,16 @@
 package com.example.spaceapp.auth.dto
 
-data class RegisterDTO(
-    val email: String,
-    val firstName: String,
-    val lastName: String,
-    val password: String
-)
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+
+class RegisterDTO : BaseObservable() {
+
+    var email = ""
+
+    var firstName = ""
+
+    var lastName = ""
+
+    var password = ""
+
+}

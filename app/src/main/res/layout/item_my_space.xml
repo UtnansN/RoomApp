@@ -10,7 +10,7 @@
             type="com.example.spaceapp.utils.DateTimeConverter" />
         <variable
             name="space"
-            type="com.example.spaceapp.data.model.dto.UserSpacesDTO" />
+            type="com.example.spaceapp.data.model.ShortSpaceDTO" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

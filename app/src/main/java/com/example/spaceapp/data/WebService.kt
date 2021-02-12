@@ -1,45 +1,51 @@
 package com.example.spaceapp.data
 
 import com.example.spaceapp.utils.Constants
-import com.example.spaceapp.data.model.local.Space
-import com.example.spaceapp.data.model.dto.EventDTO
 import com.example.spaceapp.auth.dto.LoginDTO
 import com.example.spaceapp.auth.dto.RegisterDTO
-import com.example.spaceapp.data.model.dto.UserSpacesDTO
 import com.example.spaceapp.auth.dto.LoginResponseDTO
 import com.example.spaceapp.auth.dto.RegisterResponseDTO
-import com.example.spaceapp.data.model.dto.EventPackageDTO
-import com.example.spaceapp.data.model.dto.SpaceInfoDTO
+import com.example.spaceapp.data.model.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface WebService {
 
     @GET("/api/spaces")
-    fun getSpaces(): Call<List<UserSpacesDTO>>
+    fun getSpaces(): Call<List<ShortSpaceDTO>>
 
     @GET("/api/spaces/{code}")
-    fun getSpaceInfo(@Path("code") code: String): Call<SpaceInfoDTO>
+    fun getSpaceInfo(@Path("code") code: String): Call<LongSpaceDTO>
 
     @POST("/api/spaces")
-    fun createSpace(@Body space: Space): Call<Space>
+    fun createSpace(@Body space: CreateSpaceDTO): Call<BaseSpaceDTO>
 
-    @POST("/api/spaces/{spaceCode}/join")
-    fun joinSpace(@Path("spaceCode") spaceCode: String): Call<Void>
+    @PUT("/api/spaces/{spaceCode}/join")
+    fun joinSpace(@Path("spaceCode") spaceCode: String): Call<BaseSpaceDTO>
+
+    @PUT("/api/spaces/{spaceCode}/leave")
+    fun leaveSpace(@Path("spaceCode") spaceCode: String): Call<Void>
 
     @GET("/api/spaces/{spaceCode}/events")
     fun getEventsInSpace(@Path("spaceCode") spaceCode: String): Call<EventPackageDTO>
 
     @POST("/api/spaces/{spaceCode}/events")
-    fun createEvent(@Body event: EventDTO, @Path("spaceCode") spaceCode: String): Call<EventDTO>
+    fun createEvent(@Body eventBrief: EventBriefDTO, @Path("spaceCode") spaceCode: String): Call<EventBriefDTO>
 
     @POST(Constants.DEST_LOGIN)
     fun login(@Body loginDTO: LoginDTO): Call<LoginResponseDTO>
 
     @POST(Constants.DEST_REGISTER)
-    fun signup(@Body registerDTO: RegisterDTO): Call<RegisterResponseDTO>
+    fun register(@Body registerDTO: RegisterDTO): Call<RegisterResponseDTO>
+
+    @GET("/api/spaces/{spaceCode}/events/{eventId}/attendees")
+    fun getEventAttendees(@Path("spaceCode") spaceCode: String,
+                          @Path("eventId") eventId: Long): Call<List<UserBriefDTO>>
+
+    @PUT("/api/spaces/{spaceCode}/events/{eventId}/attend")
+    fun toggleAttendance(@Path("spaceCode") spaceCode: String,
+                         @Path("eventId") eventId: Long): Call<Void>
+
+
 
 }

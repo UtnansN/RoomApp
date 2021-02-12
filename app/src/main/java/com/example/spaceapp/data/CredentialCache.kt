@@ -8,8 +8,6 @@ import javax.inject.Inject
 
 class CredentialCache @Inject constructor(@LoginPreferences private val loginPreferences: SharedPreferences) {
 
-    private var token: String? = loginPreferences.getString(Constants.PREF_TOKEN, null)
-
     fun setLoggedInUser(userName: String, password: String, token: String) {
         val editor = loginPreferences.edit()
         editor.putString(Constants.PREF_USERNAME, userName)
@@ -22,12 +20,10 @@ class CredentialCache @Inject constructor(@LoginPreferences private val loginPre
         val editor = loginPreferences.edit()
         editor.putString(Constants.PREF_TOKEN, token)
         editor.apply()
-
-        this.token = token
     }
 
     fun getCurrentToken(): String? {
-        return token
+        return loginPreferences.getString(Constants.PREF_TOKEN, null)
     }
 
     fun isTokenExpiredOrNull(): Boolean {
@@ -38,13 +34,11 @@ class CredentialCache @Inject constructor(@LoginPreferences private val loginPre
     }
 
     fun getLoginDTO(): LoginDTO {
-        val userName = loginPreferences.getString(Constants.PREF_USERNAME, null)!!
-        val password = loginPreferences.getString(Constants.PREF_PASSWORD, null)!!
+        val login = LoginDTO()
+        login.email = loginPreferences.getString(Constants.PREF_USERNAME, null)!!
+        login.password = loginPreferences.getString(Constants.PREF_PASSWORD, null)!!
 
-        return LoginDTO(
-            userName,
-            password
-        )
+        return login
     }
 
     fun invalidateUser() {
@@ -53,7 +47,6 @@ class CredentialCache @Inject constructor(@LoginPreferences private val loginPre
         editor.remove(Constants.PREF_PASSWORD)
         editor.remove(Constants.PREF_TOKEN)
         editor.apply()
-        token = null
     }
 
 }

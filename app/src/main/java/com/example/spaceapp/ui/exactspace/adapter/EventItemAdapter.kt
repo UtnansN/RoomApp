@@ -10,29 +10,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceapp.BR
 import com.example.spaceapp.utils.DateTimeConverter
 import com.example.spaceapp.R
-import com.example.spaceapp.data.model.dto.EventDTO
+import com.example.spaceapp.data.model.EventBriefDTO
 import com.example.spaceapp.databinding.ItemEventBinding
 
 class EventItemAdapter(
-    @NonNull diffCallback: DiffUtil.ItemCallback<EventDTO>,
+    @NonNull diffCallback: DiffUtil.ItemCallback<EventBriefDTO>,
     private val dateTimeConverter: DateTimeConverter
-) : ListAdapter<EventDTO, EventItemAdapter.ViewHolder>(diffCallback) {
+) : ListAdapter<EventBriefDTO, EventItemAdapter.ViewHolder>(diffCallback) {
+
 
     class ViewHolder(private val binding: ItemEventBinding, private val dateTimeConverter: DateTimeConverter) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(event: EventDTO) {
-            binding.setVariable(BR.event, event)
+        fun bind(eventBrief: EventBriefDTO) {
+            binding.setVariable(BR.event, eventBrief)
             binding.setVariable(BR.dateTimeConverter, dateTimeConverter)
             binding.executePendingBindings()
         }
     }
 
-    class EventDiff : DiffUtil.ItemCallback<EventDTO>() {
-        override fun areItemsTheSame(oldItem: EventDTO, newItem: EventDTO): Boolean {
+    class EventDiff : DiffUtil.ItemCallback<EventBriefDTO>() {
+        override fun areItemsTheSame(oldItem: EventBriefDTO, newItem: EventBriefDTO): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: EventDTO, newItem: EventDTO): Boolean {
+        override fun areContentsTheSame(oldItem: EventBriefDTO, newItem: EventBriefDTO): Boolean {
             return oldItem.eventId == newItem.eventId
         }
     }
@@ -47,12 +48,8 @@ class EventItemAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val event: EventDTO = getItem(position)
-        holder.bind(event)
-
-        holder.itemView.setOnClickListener {
-            // clickListener(room)
-        }
+        val eventBrief: EventBriefDTO = getItem(position)
+        holder.bind(eventBrief)
     }
 
 }

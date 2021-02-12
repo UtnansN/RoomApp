@@ -12,11 +12,7 @@
         tools:layout="@layout/fragment_space_join">
         <action
             android:id="@+id/action_navigation_my_spaces_to_specific_space"
-            app:destination="@id/navigation_space"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
+            app:destination="@id/navigation_space" />
         <action
             android:id="@+id/action_navigation_my_spaces_to_space_join_or_create"
             app:destination="@id/navigation_space_join_create" />
@@ -40,12 +36,20 @@
         <action
             android:id="@+id/action_navigation_space_to_create_event"
             app:destination="@id/navigation_create_event" />
+        <action
+            android:id="@+id/action_navigation_space_to_event_expanded"
+            app:destination="@id/navigation_event_expanded" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_space_join_create"
         android:name="com.example.spaceapp.ui.userspaces.fragment.CreateOrJoinFragment"
-        android:label="Join Space"/>
+        android:label="Join Space">
+        <action
+            android:id="@+id/action_navigation_space_join_create_to_specific_space"
+            app:destination="@id/navigation_space"
+            app:popUpTo="@id/navigation_my_spaces" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_space_info"
         android:name="com.example.spaceapp.ui.exactspace.fragment.SpaceInfoFragment"
@@ -62,5 +66,9 @@
             android:name="spaceCode"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_event_expanded"
+        android:name="com.example.spaceapp.ui.exactspace.fragment.EventExpandedFragment"
+        android:label="EventExpandedFragment" />
 
 </navigation>

@@ -24,7 +24,7 @@ class RegisterFragment : Fragment() {
 
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
 
-        val binding: FragmentRegisterBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
+        val binding = FragmentRegisterBinding.inflate(inflater, container, false)
         binding.viewModel = registerViewModel
 
         return binding.root

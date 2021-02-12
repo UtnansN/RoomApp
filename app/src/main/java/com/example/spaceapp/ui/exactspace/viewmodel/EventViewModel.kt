@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.spaceapp.data.AppRepository
-import com.example.spaceapp.data.model.dto.EventDTO
-import com.example.spaceapp.data.model.dto.EventPackageDTO
-import com.example.spaceapp.data.model.dto.Resource
+import com.example.spaceapp.data.model.EventPackageDTO
+import com.example.spaceapp.data.model.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -9,10 +9,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceapp.R
-import com.example.spaceapp.data.model.dto.Resource
+import com.example.spaceapp.data.model.Resource
 import com.example.spaceapp.ui.userspaces.adapter.AllSpacesItemAdapter
 import com.example.spaceapp.ui.userspaces.viewmodel.AllSpacesViewModel
 import com.example.spaceapp.utils.DateTimeConverter
+import com.google.android.material.transition.MaterialFadeThrough
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -63,16 +64,17 @@ class AllSpacesFragment : Fragment() {
         }
 
         spaceRecyclerView = root.findViewById(R.id.rec_items)
-        spaceRecyclerView.apply {
-            layoutManager = LinearLayoutManager(this.context)
-            adapter = allSpacesItemAdapter
-        }
 
         return root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        spaceRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = allSpacesItemAdapter
+        }
 
         viewModel.allSpaces.observe(viewLifecycleOwner, {
             when (it.status) {
