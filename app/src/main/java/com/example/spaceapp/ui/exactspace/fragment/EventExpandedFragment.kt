@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceapp.R
+import com.example.spaceapp.data.model.Resource
 import com.example.spaceapp.databinding.FragmentEventExpandedBinding
 import com.example.spaceapp.ui.exactspace.adapter.UserItemAdapter
 import com.example.spaceapp.ui.exactspace.viewmodel.EventExpandedViewModel
@@ -22,10 +23,10 @@ class EventExpandedFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            drawingViewId = R.id.nav_host_fragment
-            scrimColor = Color.TRANSPARENT
-        }
+//        sharedElementEnterTransition = MaterialContainerTransform().apply {
+//            drawingViewId = R.id.nav_host_fragment
+//            scrimColor = Color.TRANSPARENT
+//        }
     }
 
     override fun onCreateView(
@@ -49,9 +50,21 @@ class EventExpandedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val itemAdapter = UserItemAdapter(UserItemAdapter.UserDiff())
+
         attendeeRecyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
-            adapter = UserItemAdapter(UserItemAdapter.UserDiff())
+            adapter = itemAdapter
+        }
+
+        eventExpandedViewModel.attendees.observe(viewLifecycleOwner) {
+            when (it.status) {
+                Resource.Status.LOADING -> {}
+                Resource.Status.SUCCESS -> {
+                    it.data?.let { userList -> itemAdapter.submitList(userList) }
+                }
+                Resource.Status.ERROR -> {}
+            }
         }
     }
 

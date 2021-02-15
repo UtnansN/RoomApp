@@ -9,7 +9,7 @@
         android:id="@+id/navigation_my_spaces"
         android:name="com.example.spaceapp.ui.userspaces.fragment.AllSpacesFragment"
         android:label="@string/title_my_spaces"
-        tools:layout="@layout/fragment_space_join">
+        tools:layout="@layout/fragment_itemlist">
         <action
             android:id="@+id/action_navigation_my_spaces_to_specific_space"
             app:destination="@id/navigation_space" />
@@ -21,7 +21,8 @@
     <fragment
         android:id="@+id/navigation_space"
         android:name="com.example.spaceapp.ui.exactspace.fragment.SpaceFragment"
-        android:label="{title}">
+        android:label="{title}"
+        tools:layout="@layout/fragment_space">
 
         <argument
             android:name="title"
@@ -44,7 +45,8 @@
     <fragment
         android:id="@+id/navigation_space_join_create"
         android:name="com.example.spaceapp.ui.userspaces.fragment.CreateOrJoinFragment"
-        android:label="Join Space">
+        android:label="Join Space"
+        tools:layout="@layout/fragment_space_join">
         <action
             android:id="@+id/action_navigation_space_join_create_to_specific_space"
             app:destination="@id/navigation_space"
@@ -53,7 +55,8 @@
     <fragment
         android:id="@+id/navigation_space_info"
         android:name="com.example.spaceapp.ui.exactspace.fragment.SpaceInfoFragment"
-        android:label="About" >
+        android:label="About"
+        tools:layout="@layout/fragment_space_about">
         <argument
             android:name="spaceCode"
             app:argType="string" />
@@ -61,7 +64,8 @@
     <fragment
         android:id="@+id/navigation_create_event"
         android:name="com.example.spaceapp.ui.exactspace.fragment.CreateEventFragment"
-        android:label="Create an event">
+        android:label="Create an event"
+        tools:layout="@layout/fragment_event_create">
         <argument
             android:name="spaceCode"
             app:argType="string" />
@@ -69,6 +73,7 @@
     <fragment
         android:id="@+id/navigation_event_expanded"
         android:name="com.example.spaceapp.ui.exactspace.fragment.EventExpandedFragment"
-        android:label="EventExpandedFragment" />
+        android:label="EventExpandedFragment"
+        tools:layout="@layout/fragment_event_expanded"/>
 
 </navigation>

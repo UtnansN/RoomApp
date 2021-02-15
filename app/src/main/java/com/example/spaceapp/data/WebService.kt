@@ -6,6 +6,8 @@ import com.example.spaceapp.auth.dto.RegisterDTO
 import com.example.spaceapp.auth.dto.LoginResponseDTO
 import com.example.spaceapp.auth.dto.RegisterResponseDTO
 import com.example.spaceapp.data.model.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -37,6 +39,11 @@ interface WebService {
 
     @POST(Constants.DEST_REGISTER)
     fun register(@Body registerDTO: RegisterDTO): Call<RegisterResponseDTO>
+
+    @Multipart
+    @POST(Constants.DEST_REGISTER)
+    fun register(@PartMap partMap: HashMap<String, RequestBody>,
+                 @Part file: MultipartBody.Part?): Call<RegisterResponseDTO>
 
     @GET("/api/spaces/{spaceCode}/events/{eventId}/attendees")
     fun getEventAttendees(@Path("spaceCode") spaceCode: String,

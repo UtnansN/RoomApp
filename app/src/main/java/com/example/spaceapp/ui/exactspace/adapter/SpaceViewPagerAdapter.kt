@@ -1,6 +1,7 @@
 package com.example.spaceapp.ui.exactspace.adapter
 
 import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.spaceapp.ui.exactspace.fragment.DiscussionFragment
@@ -19,9 +20,7 @@ class SpaceViewPagerAdapter(fragment: Fragment, private val spaceCode: String) :
             1 -> DiscussionFragment()
             else -> throw IllegalStateException("Invalid adapter position")
         }
-        val args = Bundle()
-        args.putString("spaceCode", spaceCode)
-        fragment.arguments = args
+        fragment.arguments = bundleOf("spaceCode" to spaceCode)
         return fragment
     }
 
