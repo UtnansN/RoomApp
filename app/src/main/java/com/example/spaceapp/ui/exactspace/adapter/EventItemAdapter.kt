@@ -12,10 +12,12 @@ import com.example.spaceapp.utils.DateTimeConverter
 import com.example.spaceapp.R
 import com.example.spaceapp.data.model.EventBriefDTO
 import com.example.spaceapp.databinding.ItemEventBinding
+import com.example.spaceapp.generated.callback.OnClickListener
 
 class EventItemAdapter(
     @NonNull diffCallback: DiffUtil.ItemCallback<EventBriefDTO>,
-    private val dateTimeConverter: DateTimeConverter
+    private val dateTimeConverter: DateTimeConverter,
+    private val listener: (EventBriefDTO) -> Unit
 ) : ListAdapter<EventBriefDTO, EventItemAdapter.ViewHolder>(diffCallback) {
 
 
@@ -50,6 +52,10 @@ class EventItemAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val eventBrief: EventBriefDTO = getItem(position)
         holder.bind(eventBrief)
+
+        holder.itemView.setOnClickListener {
+            listener(eventBrief)
+        }
     }
 
 }

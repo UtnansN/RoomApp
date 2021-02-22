@@ -2,6 +2,7 @@ package com.example.spaceapp.ui.exactspace.fragment
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -11,12 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.Slide
 import com.example.spaceapp.R
 import com.example.spaceapp.data.model.Resource
 import com.example.spaceapp.databinding.FragmentSpaceAboutBinding
 import com.example.spaceapp.generated.callback.OnClickListener
 import com.example.spaceapp.ui.exactspace.adapter.UserItemAdapter
 import com.example.spaceapp.ui.exactspace.viewmodel.SpaceInfoViewModel
+import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.NonCancellable.cancel
 
@@ -102,7 +105,6 @@ class SpaceInfoFragment : Fragment() {
                 }
             }
         }
-
     }
 
     private fun createConfirmationDialog(

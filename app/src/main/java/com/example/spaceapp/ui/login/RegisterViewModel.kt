@@ -29,11 +29,8 @@ class RegisterViewModel @Inject constructor(private val appRepository: AppReposi
 
     val registerDTO = RegisterDTO()
 
-    fun register() {
-        appRepository.enqueueApiCallAndUpdateData(_registerResponse) { it.register(registerDTO) }
-    }
 
-    fun registerV2() {
+    fun register() {
 
         val filePath = imageURI.get()?.path
 //        var file: RequestBody? = null

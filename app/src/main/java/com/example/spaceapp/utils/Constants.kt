@@ -16,5 +16,4 @@ object Constants {
     const val DEST_EVENTS_IN_SPACE = "/api/spaces/{spaceCode}/events"
     const val DEST_LOGIN = "/api/login"
     const val DEST_REGISTER = "/api/signup"
-    const val DEST_REGISTER_V2 = "/api/v2/signup"
 }

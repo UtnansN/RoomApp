@@ -54,7 +54,7 @@ class SpaceFragment : Fragment() {
         spaceViewModel = ViewModelProvider(this).get(SpaceViewModel::class.java)
         spaceViewModel.setSpaceId(spaceCode)
 
-        val binding: FragmentSpaceBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_space, container, false)
+        val binding = FragmentSpaceBinding.inflate(inflater, container, false)
         val root = binding.root
 
         binding.lifecycleOwner = this

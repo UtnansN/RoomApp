@@ -69,11 +69,22 @@
         <argument
             android:name="spaceCode"
             app:argType="string" />
+        <action
+            android:id="@+id/action_navigation_create_event_to_navigation_event_expanded"
+            app:destination="@id/navigation_event_expanded"
+            app:popUpTo="@id/navigation_space" />
     </fragment>
     <fragment
         android:id="@+id/navigation_event_expanded"
         android:name="com.example.spaceapp.ui.exactspace.fragment.EventExpandedFragment"
         android:label="EventExpandedFragment"
-        tools:layout="@layout/fragment_event_expanded"/>
+        tools:layout="@layout/fragment_event_expanded">
+        <argument
+            android:name="spaceCode"
+            app:argType="string" />
+        <argument
+            android:name="eventBrief"
+            app:argType="com.example.spaceapp.data.model.EventBriefDTO" />
+    </fragment>
 
 </navigation>

@@ -35,7 +35,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:src="@{viewModel.imageURI}"
-                tools:srcCompat="@tools:sample/avatars" />
+                placeholder="@{@drawable/ic_userplaceholder}"
+                tools:srcCompat="@drawable/ic_userplaceholder" />
 
             <Button
                 android:id="@+id/btn_register_select_avatar"
@@ -105,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:enabled="true"
-                android:onClick="@{() -> viewModel.registerV2()}"
+                android:onClick="@{() -> viewModel.register()}"
                 android:text="Register"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -16,10 +16,12 @@ class UserItemAdapter(
 
     class ViewHolder(private val binding: ItemMemberBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(user: UserBriefDTO) {
             binding.setVariable(BR.user, user)
             binding.executePendingBindings()
         }
+
     }
 
     class UserDiff : DiffUtil.ItemCallback<UserBriefDTO>() {

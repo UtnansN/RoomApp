@@ -1,22 +1,16 @@
 package com.example.spaceapp.ui.login
 
 import android.app.Activity
-import android.app.Instrumentation
-import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.spaceapp.R
@@ -67,6 +61,7 @@ class RegisterFragment : Fragment() {
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
 
         val binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
         binding.viewModel = registerViewModel
 
         val root = binding.root

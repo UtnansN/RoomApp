@@ -1,6 +1,5 @@
 package com.example.spaceapp.ui.exactspace.fragment
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,24 +9,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spaceapp.R
+import com.example.spaceapp.data.model.EventBriefDTO
 import com.example.spaceapp.data.model.Resource
 import com.example.spaceapp.databinding.FragmentEventExpandedBinding
 import com.example.spaceapp.ui.exactspace.adapter.UserItemAdapter
 import com.example.spaceapp.ui.exactspace.viewmodel.EventExpandedViewModel
-import com.google.android.material.transition.MaterialContainerTransform
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EventExpandedFragment : Fragment() {
 
     private lateinit var eventExpandedViewModel: EventExpandedViewModel
     private lateinit var attendeeRecyclerView: RecyclerView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        sharedElementEnterTransition = MaterialContainerTransform().apply {
-//            drawingViewId = R.id.nav_host_fragment
-//            scrimColor = Color.TRANSPARENT
-//        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,8 +30,14 @@ class EventExpandedFragment : Fragment() {
 
         eventExpandedViewModel = ViewModelProvider(this).get(EventExpandedViewModel::class.java)
 
+        val spaceCode = requireArguments().getString("spaceCode")!!
+        val eventBrief = requireArguments().getParcelable<EventBriefDTO>("eventBrief")!!
+
+        eventExpandedViewModel.setExpandedContext(spaceCode, eventBrief)
+
         val binding = FragmentEventExpandedBinding.inflate(inflater, container, false)
         binding.viewModel = eventExpandedViewModel
+        binding.lifecycleOwner = this
 
         val root = binding.root
 
@@ -57,13 +56,21 @@ class EventExpandedFragment : Fragment() {
             adapter = itemAdapter
         }
 
-        eventExpandedViewModel.attendees.observe(viewLifecycleOwner) {
+        eventExpandedViewModel.eventExpandedDTO.observe(viewLifecycleOwner) {
             when (it.status) {
-                Resource.Status.LOADING -> {}
                 Resource.Status.SUCCESS -> {
-                    it.data?.let { userList -> itemAdapter.submitList(userList) }
+                    it.data?.let { extendedDTO -> itemAdapter.submitList(extendedDTO.attendees) }
                 }
-                Resource.Status.ERROR -> {}
+                else -> {}
+            }
+        }
+
+        eventExpandedViewModel.attendanceCallState.observe(viewLifecycleOwner) {
+            when (it.status) {
+                Resource.Status.SUCCESS -> {
+                    eventExpandedViewModel.fetchAttendees()
+                }
+                else -> {}
             }
         }
     }

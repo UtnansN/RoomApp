@@ -32,27 +32,26 @@ interface WebService {
     fun getEventsInSpace(@Path("spaceCode") spaceCode: String): Call<EventPackageDTO>
 
     @POST("/api/spaces/{spaceCode}/events")
-    fun createEvent(@Body eventBrief: EventBriefDTO, @Path("spaceCode") spaceCode: String): Call<EventBriefDTO>
+    fun createEvent(@Body createEventDTO: CreateEventDTO, @Path("spaceCode") spaceCode: String): Call<EventBriefDTO>
 
     @POST(Constants.DEST_LOGIN)
     fun login(@Body loginDTO: LoginDTO): Call<LoginResponseDTO>
-
-    @POST(Constants.DEST_REGISTER)
-    fun register(@Body registerDTO: RegisterDTO): Call<RegisterResponseDTO>
 
     @Multipart
     @POST(Constants.DEST_REGISTER)
     fun register(@PartMap partMap: HashMap<String, RequestBody>,
                  @Part file: MultipartBody.Part?): Call<RegisterResponseDTO>
 
-    @GET("/api/spaces/{spaceCode}/events/{eventId}/attendees")
-    fun getEventAttendees(@Path("spaceCode") spaceCode: String,
-                          @Path("eventId") eventId: Long): Call<List<UserBriefDTO>>
+    @GET("/api/spaces/{spaceCode}/events/{eventId}")
+    fun getEventExtendedInformation(@Path("spaceCode") spaceCode: String,
+                                    @Path("eventId") eventId: Long): Call<EventExtendedDTO>
 
     @PUT("/api/spaces/{spaceCode}/events/{eventId}/attend")
-    fun toggleAttendance(@Path("spaceCode") spaceCode: String,
+    fun attendEvent(@Path("spaceCode") spaceCode: String,
                          @Path("eventId") eventId: Long): Call<Void>
 
-
+    @PUT("/api/spaces/{spaceCode}/events/{eventId}/unattend")
+    fun unattendEvent(@Path("spaceCode") spaceCode: String,
+                    @Path("eventId") eventId: Long): Call<Void>
 
 }

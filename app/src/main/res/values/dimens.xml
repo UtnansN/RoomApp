@@ -6,6 +6,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="close_divider_margin">4dp</dimen>
     <dimen name="extra_close_divider_margin">2dp</dimen>
-    <dimen name="base_text">24sp</dimen>
+    <dimen name="base_text">16sp</dimen>
     <dimen name="content_pad_medium">8dp</dimen>
 </resources>

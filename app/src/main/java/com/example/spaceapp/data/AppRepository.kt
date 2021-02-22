@@ -13,11 +13,6 @@ class AppRepository @Inject constructor(
     private val credentialCache: CredentialCache
 ) {
 
-    fun createEvent(holder: MutableLiveData<Resource<EventBriefDTO>>, eventBrief: EventBriefDTO, spaceCode: String) {
-        val call = webService.createEvent(eventBrief, spaceCode)
-        call.enqueue(genericDataUpdaterCallback(holder))
-    }
-
     fun <T> enqueueApiCallAndUpdateData(holder: MutableLiveData<Resource<T>>, webCall: (webService: WebService) -> Call<T>) {
         webCall(webService).enqueue(genericDataUpdaterCallback(holder))
     }

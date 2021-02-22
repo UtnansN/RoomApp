@@ -47,11 +47,14 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="infinity">&#8734;</string>
     <string name="no_upcoming_events">No upcoming events</string>
     <string name="next_event">Next event: %1$s</string>
     <string name="last_name">Last name</string>
     <string name="first_name">First name</string>
-    <string name="attendees">Attendees</string>
+    <string name="attendees">%1$s attendees</string>
+    <string name="members_single">1 member</string>
+    <string name="members_counted">%1$s members</string>
     <string name="yes">Yes</string>
     <string name="cancel">Cancel</string>
     <string name="confirmation">Confirmation</string>
@@ -59,4 +62,10 @@
     <string name="attend">Attend</string>
     <string name="action_register">Register</string>
     <string name="profile_picture_select">Select a profile picture (optional)</string>
+
+    <string name="transition_create_event">transition_create_event</string>
+    <string name="unattend">Unattend</string>
+    <string name="limit_attendee_count">Limit attendee count?</string>
+    <string name="attendee_count">Attendee count</string>
+    <string name="remove_image">Remove image</string>
 </resources>

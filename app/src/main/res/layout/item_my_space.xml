@@ -66,8 +66,8 @@
                 android:id="@+id/img_space"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:ignore="ContentDescription"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:src="@drawable/ic_userplaceholder"
+                tools:ignore="ContentDescription" />
         </FrameLayout>
 
         <TextView

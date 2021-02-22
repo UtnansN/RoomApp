@@ -7,15 +7,18 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.Slide
 import com.example.spaceapp.utils.DateTimeConverter
 import com.example.spaceapp.R
 import com.example.spaceapp.data.model.Resource
 import com.example.spaceapp.ui.exactspace.adapter.EventItemAdapter
 import com.example.spaceapp.ui.exactspace.viewmodel.EventViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.transition.MaterialElevationScale
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -46,7 +49,10 @@ class EventFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_itemlist, container, false)
 
-        eventItemAdapter = EventItemAdapter(EventItemAdapter.EventDiff(), dateTimeConverter)
+        eventItemAdapter = EventItemAdapter(EventItemAdapter.EventDiff(), dateTimeConverter) {
+            val bundle = bundleOf("spaceCode" to spaceCode, "eventBrief" to it)
+            findNavController().navigate(R.id.action_navigation_space_to_event_expanded, bundle)
+        }
 
         eventRecyclerView = root.findViewById(R.id.rec_items)
         emptyView = root.findViewById(R.id.rec_emptyview)
@@ -64,8 +70,16 @@ class EventFragment : Fragment() {
         }
 
         addEventFab.setOnClickListener {
-            val bundle = bundleOf("spaceCode" to spaceCode)
-            findNavController().navigate(R.id.action_navigation_space_to_create_event, bundle)
+            val directions = SpaceFragmentDirections.actionNavigationSpaceToCreateEvent(spaceCode)
+            findNavController().navigate(directions)
+        }
+
+        requireParentFragment().exitTransition = MaterialElevationScale(false).apply {
+            duration = 300
+        }
+
+        requireParentFragment().reenterTransition = MaterialElevationScale(true).apply {
+            duration = 300
         }
 
         eventViewModel.allEvents.observe(viewLifecycleOwner, {

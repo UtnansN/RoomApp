@@ -5,5 +5,9 @@ data class UserBriefDTO(
 
     val fullName: String,
 
-    val role: String
+    val joinDate: String?,
+
+    val role: String?,
+
+    val imageURI: String?
 )

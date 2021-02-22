@@ -4,122 +4,190 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View" />
         <variable
-            name="spaceCode"
-            type="String"/>
-        <variable
-            name="viewmodel"
+            name="viewModel"
             type="com.example.spaceapp.ui.exactspace.viewmodel.CreateEventViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/txt_event_create_name"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center"
-            android:hint="@string/event_name"
-            android:importantForAutofill="no"
-            android:inputType="textCapSentences"
-            android:lines="1"
-            android:text="@={viewmodel.name}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.349" />
+            android:padding="8dp">
 
-        <EditText
-            android:id="@+id/txt_event_create_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center"
-            android:hint="@string/description"
-            android:importantForAutofill="no"
-            android:inputType="textCapSentences"
-            android:lines="1"
-            android:text="@={viewmodel.description}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_event_create_name" />
+            <ImageView
+                android:id="@+id/img_event_create"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="16:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:src="@{viewModel.imageURI}"
+                placeholder="@{@drawable/rounded_edittext}"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <EditText
-            android:id="@+id/txt_event_create_time"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:clickable="true"
-            android:ems="10"
-            android:focusable="false"
-            android:gravity="center"
-            android:hint="@string/time"
-            android:inputType="none"
-            android:longClickable="false"
-            android:text="@={viewmodel.time}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txt_event_create_date"
-            app:layout_constraintTop_toTopOf="@+id/txt_event_create_date"
-            tools:ignore="KeyboardInaccessibleWidget" />
+            <Button
+                android:id="@+id/btn_create_event_remove_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/remove_image"
+                android:visibility="@{viewModel.imageURI != null ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_event_create" />
 
-        <EditText
-            android:id="@+id/txt_event_create_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:clickable="true"
-            android:ems="10"
-            android:focusable="false"
-            android:gravity="center"
-            android:hint="@string/date"
-            android:inputType="none"
-            android:longClickable="false"
-            android:text="@={viewmodel.date}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_event_create_description"
-            tools:ignore="KeyboardInaccessibleWidget,TextFields" />
+            <EditText
+                android:id="@+id/txt_event_create_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:hint="@string/event_name"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences"
+                android:lines="1"
+                android:text="@={viewModel.name}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_create_event_remove_image" />
 
-        <EditText
-            android:id="@+id/txt_event_create_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center"
-            android:hint="@string/location"
-            android:importantForAutofill="no"
-            android:inputType="textCapSentences"
-            android:lines="1"
-            android:text="@={viewmodel.location}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_event_create_date" />
+            <EditText
+                android:id="@+id/txt_event_create_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/close_divider_margin"
+                android:gravity="center"
+                android:hint="@string/description"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences"
+                android:lines="1"
+                android:text="@={viewModel.description}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_event_create_name" />
 
-        <Button
-            android:id="@+id/btn_create_event"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/submit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_event_create_location" />
+            <EditText
+                android:id="@+id/txt_event_create_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/close_divider_margin"
+                android:layout_marginEnd="4dp"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="false"
+                android:gravity="center"
+                android:hint="@string/date"
+                android:inputType="none"
+                android:longClickable="false"
+                android:text="@={viewModel.date}"
+                app:layout_constraintEnd_toStartOf="@+id/txt_event_create_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_event_create_description"
+                tools:ignore="TextFields" />
+
+            <EditText
+                android:id="@+id/txt_event_create_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="false"
+                android:gravity="center"
+                android:hint="@string/time"
+                android:inputType="none"
+                android:longClickable="false"
+                android:text="@={viewModel.time}"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_event_create_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_event_create_date"
+                app:layout_constraintTop_toTopOf="@+id/txt_event_create_date" />
+
+            <EditText
+                android:id="@+id/txt_event_create_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/close_divider_margin"
+                android:gravity="center"
+                android:hint="@string/location"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences"
+                android:lines="1"
+                android:text="@={viewModel.location}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_event_create_date" />
+
+            <EditText
+                android:id="@+id/txt_event_create_max_attendees"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="@string/attendee_count"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences"
+                android:lines="1"
+                android:maxLines="1"
+                android:text="@={viewModel.location}"
+                app:layout_constraintBottom_toBottomOf="@+id/switch_event_create_limit_attendees"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="@+id/textView" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/limit_attendee_count"
+                app:layout_constraintEnd_toStartOf="@+id/txt_event_create_max_attendees"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_event_create_location" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_event_create_limit_attendees"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/close_divider_margin"
+                android:text="@null"
+                app:layout_constraintEnd_toEndOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="switch_event_create_limit_attendees,txt_event_create_max_attendees"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="476dp" />
+
+            <Button
+                android:id="@+id/btn_create_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:onClick="@{() -> viewModel.submitData()}"
+                android:text="@string/submit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barrier_submit" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </layout>
